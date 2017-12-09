@@ -1,6 +1,6 @@
-# CryptoCards
+# CryptoMonsters
 
-A card trading game that uses blockchain technology in order for players to get cards and also be able to trade cards. Each card would then be owned securely by the player in their digital wallet. Players would get cards either by "mining" for them, trading with other players, or melding two cards to create a new card. Each card would have specific attribute genetics that could be passed on to their children.
+A card trading game that uses blockchain technology in order for players to get cards. Each card would then be owned securely by the player in their digital wallet. Players would get cards either by "mining" for them, trading with other players, or melding two cards to create a new card. Each card would have specific attribute genetics that could be passed on to their children.
 
 This is a work in progress and hopefully we will remember to keep this updated as we move along.
 
