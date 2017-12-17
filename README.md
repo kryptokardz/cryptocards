@@ -6,3 +6,7 @@ This is a work in progress and hopefully we will remember to keep this updated a
 
 ## Authors
 **[Cody Dibble](https://www.github.com/hcodydibble)** - **[Mark Reynoso](https://www.github.com/markreynoso)** - **[John Jensen](https://www.github.com/thejohnjensen)** - **[Chaitanya Narukulla](https://www.github.com/chaitanyanarukulla)**
+
+## Routes
+| Route | Name | Description |
+|:--|--|:--|
