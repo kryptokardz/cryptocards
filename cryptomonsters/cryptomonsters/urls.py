@@ -21,5 +21,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^monsters/', include('monsters.urls')),
+    url(r'^mining/', include('mining.urls')),
     url(r'^$', home_view, name='home'),
 ]
