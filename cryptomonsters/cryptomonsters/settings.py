@@ -132,6 +132,7 @@ if not DEBUG:
     AWS_STORAGE_BUCKET_NAME = 'cryptomonsters'
     AWS_ACCESS_KEY_ID = os.environ.get('IAM_USER_ACCESS_KEY_ID', '')
     AWS_SECRET_ACCESS_KEY = os.environ.get('IAM_USER_SECRET_ACCESS_KEY', '')
+    AWS_S3_HOST = 's3-us-west-2b.amazonaws.com'
 
     AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
