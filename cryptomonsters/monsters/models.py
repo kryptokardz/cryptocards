@@ -8,14 +8,17 @@ fake = Faker()
 
 
 def random_name():
+    """Return a random first name using Faker."""
     return fake.first_name()
 
 
 def random_stats():
+    """Return a random integer between 1 and 10 using Faker."""
     return randint(1, 10)
 
 
 def random_id():
+    """Return the hashed value of a group of random words generated using Faker."""
     return hash(''.join(fake.words()))
 
 
@@ -43,4 +46,3 @@ class Monster(models.Model):
     def __str__(self):
         """Render as string."""
         return self.title
-
