@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cryptomonsters'
+    'cryptomonsters',
+    'monsters'
 ]
 
 MIDDLEWARE = [
@@ -78,9 +79,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DB_NAME', ''),
-        # 'USER': os.environ.get('DB_USER', ''),
-        # 'PASSWORD': os.environ.get('DB_PASSWORD', ''),
-        # 'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'USER': os.environ.get('DB_USER', ''),
+        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
         'PORT': '5432',
         'TEST': {
             'NAME': os.environ.get('TEST_DB', ''),
