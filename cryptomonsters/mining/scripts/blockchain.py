@@ -49,13 +49,14 @@ class BlockChain(object):
         """."""
         return self.chain[len(self.chain) - 1]
 
-    def new_block(self, user, monster_id):
+    def new_block(self, user):
         """."""
         previous_block = self.get_previous_block()
         # run proof of work function
         proof = self.proof_of_work(previous_block)
         index = previous_block.index + 1
         monster_id = previous_block.monster_id + 1
+        # TODO: get monster
         timestamp = date.datetime.now()
         previous_hash = previous_block.hash
         user = user
@@ -103,6 +104,7 @@ class BlockChain(object):
         return sha.hexdigest()
 
 
+blockchain = BlockChain()
 
 
 
