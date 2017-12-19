@@ -30,7 +30,7 @@ def random_type():
         ('Zombie'),
         ('Minotaur')
     )
-    return types[randint(0, len(types) - 1)]
+    return choice(types)
 
 
 class Monster(models.Model):
