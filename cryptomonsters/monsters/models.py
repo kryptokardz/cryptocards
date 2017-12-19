@@ -33,6 +33,7 @@ def random_type():
     return choice(types)
 
 
+
 class Monster(models.Model):
     """Create new monster model."""
 
@@ -40,12 +41,12 @@ class Monster(models.Model):
         User,
         related_name='monsters',
         on_delete=models.CASCADE)
-    img_file = models.ImageField()
     name = models.CharField(max_length=30, default=random_name)
     health = models.IntegerField(default=random_stats)
     defense = models.IntegerField(default=random_stats)
     attack = models.IntegerField(default=random_stats)
     monster_type = models.CharField(max_length=100, default=random_type)
+    img_file = models.ImageField()
 
     def __str__(self):
         """Render as string."""

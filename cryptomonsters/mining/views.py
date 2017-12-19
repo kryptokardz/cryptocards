@@ -24,9 +24,10 @@ class MiningNewBlock(ListView):
         """."""
         context = super(MiningNewBlock, self).get_context_data(**kwargs)
         user = context['view'].request.user
-        monster = json.loads(blockchain.blockchain.new_block(user))
+        # monster = json.loads(blockchain.blockchain.new_block(user))
+        monster = blockchain.blockchain.new_block(user)
         context['data'] = monster
-        print(monster)
+        # import pdb; pdb.set_trace()
         return context
 
 
