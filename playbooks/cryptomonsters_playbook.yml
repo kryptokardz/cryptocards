@@ -1,0 +1,82 @@
+---
+- hosts: us-west-2b
+  remote_user: ubuntu
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: update ubuntu system
+      apt: update_cache=yes
+
+    - name: install basic unix services
+      apt: name={{ item }} state=latest
+      with_items:
+        - nginx
+        - python3
+        - python3-pip
+        - python3.4-venv
+        - git
+
+    - name: git clone cryptocards
+      git:
+        clone: yes
+        repo: https://github.com/kryptokardz/cryptocards.git
+        dest: /home/ubuntu/cryptocards
+        version: mark_mon
+
+    - name: create python3 virtual enviroment
+      command: python3 -m venv /home/ubuntu/cryptocards
+
+    - name: update pip
+      pip:
+        name: pip
+        extra_args: --upgrade
+        virtualenv: /home/ubuntu/cryptocards
+
+    - name: install gunicorn in the enviroment
+      pip:
+        name: gunicorn
+        virtualenv: /home/ubuntu/cryptocards
+
+    - name: install required packages
+      pip:
+        requirements: /home/ubuntu/cryptocards/requirements.txt
+        virtualenv: /home/ubuntu/cryptocards
+
+    - name: register the old default file
+      stat: path=/etc/nginx/sites-available/default.old
+      register: default_stat
+
+    - name: rename the old default nginx file if doesn't exist
+      command: mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.old
+      when: not default_stat.stat.exists
+
+    - name: create new nginx default file
+      template:
+        src: templates/nginx_config
+        dest: /etc/nginx/sites-available/default
+
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
+
+    - name: create new upstart script and move to  /etc/init
+      template:
+        src: templates/upstart_config
+        dest: /etc/init/cryptomonsters.conf
+
+    - name: collect static files
+      environment:
+        SECRET_KEY: "{{ lookup('ENV', 'SECRET_KEY') }}"
+        DEBUG: ''
+        IAM_USER_ACCESS_KEY_ID: "{{ lookup('ENV', 'IAM_USER_ACCESS_KEY_ID') }}"
+        IAM_USER_SECRET_ACCESS_KEY: "{{ lookup('ENV', 'IAM_USER_SECRET_ACCESS_KEY') }}"
+      django_manage: 
+        command: collectstatic
+        app_path: /home/ubuntu/cryptocards/cryptomonsters/
+        virtualenv: /home/ubuntu/cryptocards
+
+    - name: restart cryptomonsters
+      service:
+        name: cryptomonsters
+        state: restarted
