@@ -21,7 +21,7 @@
         clone: yes
         repo: https://github.com/kryptokardz/cryptocards.git
         dest: /home/ubuntu/cryptocards
-        version: trytofixaws
+        version: blockchain
 
     - name: create python3 virtual enviroment
       command: python3 -m venv /home/ubuntu/cryptocards
@@ -65,16 +65,16 @@
         src: templates/upstart_config
         dest: /etc/init/cryptomonsters.conf
 
-    # - name: collect static files
-    #   environment:
-    #     SECRET_KEY: "{{ lookup('ENV', 'SECRET_KEY') }}"
-    #     DEBUG: ''
-    #     IAM_USER_ACCESS_KEY_ID: "{{ lookup('ENV', 'IAM_USER_ACCESS_KEY_ID') }}"
-    #     IAM_USER_SECRET_ACCESS_KEY: "{{ lookup('ENV', 'IAM_USER_SECRET_ACCESS_KEY') }}"
-    #   django_manage: 
-    #     command: collectstatic
-    #     app_path: /home/ubuntu/cryptocards/cryptomonsters/
-    #     virtualenv: /home/ubuntu/cryptocards
+    - name: collect static files
+      environment:
+        SECRET_KEY: "{{ lookup('ENV', 'SECRET_KEY') }}"
+        DEBUG: ''
+        IAM_USER_ACCESS_KEY_ID: "{{ lookup('ENV', 'IAM_USER_ACCESS_KEY_ID') }}"
+        IAM_USER_SECRET_ACCESS_KEY: "{{ lookup('ENV', 'IAM_USER_SECRET_ACCESS_KEY') }}"
+      django_manage: 
+        command: collectstatic
+        app_path: /home/ubuntu/cryptocards/cryptomonsters/
+        virtualenv: /home/ubuntu/cryptocards
 
     # - name: migrate rds
     #   environment:
