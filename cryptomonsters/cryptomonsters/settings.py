@@ -25,9 +25,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DEBUG', ''))
 
-ALLOWED_HOSTS = ['ec2-34-215-7-234.us-west-2.compute.amazonaws.com',
-                 '34.215.7.234', '127.0.0.1', 'LOCALHOST']
-
+# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '')
+ALLOWED_HOSTS = ['ec2-34-215-7-234.us-west-2.compute.amazonaws.com', 'localhost']
 
 # Application definition
 
@@ -83,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DB_NAME', ''),
         'USER': os.environ.get('DB_USER', ''),
-        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+        'PASSWORD': os.environ.get('DB_PASS', ''),
         'HOST': os.environ.get('DB_HOST', 'localhost'),
         'PORT': '5432',
         'TEST': {
@@ -142,6 +141,7 @@ if not DEBUG:
     STATICFILES_LOCATION = 'static'
     STATICFILES_STORAGE = 'cryptomonsters.custom_storages.StaticStorage'
     STATIC_URL = 'https://{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+
 
 else:
     STATIC_URL = '/static/'
