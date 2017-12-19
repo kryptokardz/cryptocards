@@ -14,7 +14,9 @@ env IAM_USER_ACCESS_KEY_ID="{{ lookup('ENV', 'IAM_USER_ACCESS_KEY_ID') }}"
 env IAM_USER_SECRET_ACCESS_KEY="{{ lookup('ENV', 'IAM_USER_SECRET_ACCESS_KEY') }}"
 
 
-exec /home/ubuntu/cryptocards/bin/python manage.py migrate
-exec /home/ubuntu/cryptocards/bin/python manage.py collectstatic
+env DB_NAME='cryptomonsters'
+env DB_HOST='cryptomonsters.cz28mdvh5vse.us-west-2.rds.amazonaws.com'
+env DB_USER='cryptomonsters'
+env DB_PASS='assword1'
 
 exec /home/ubuntu/cryptocards/bin/gunicorn -b :8080 cryptomonsters.wsgi
