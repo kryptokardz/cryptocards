@@ -33,7 +33,6 @@ def random_type():
     return choice(types)
 
 
-
 class Monster(models.Model):
     """Create new monster model."""
 
@@ -46,6 +45,7 @@ class Monster(models.Model):
     defense = models.IntegerField(default=random_stats)
     attack = models.IntegerField(default=random_stats)
     monster_type = models.CharField(max_length=100, default=random_type)
+    unique_id = models.IntegerField(default=0)
     img_file = models.ImageField()
 
     def __str__(self):
