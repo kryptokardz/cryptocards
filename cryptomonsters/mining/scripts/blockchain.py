@@ -148,6 +148,7 @@ def create_monster(user, monster_id):
     # }, sort_keys=True, indent=4,
     #     separators=(',', ':'))
     # return monster_info
+    monster.save()
     return monster
 
 blockchain = BlockChain()

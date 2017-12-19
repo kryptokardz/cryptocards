@@ -34,40 +34,37 @@
 
    <section class="element-page">
           <div class="container">
-            <h2 class="text-center">username</h2>
+            <h2 class="text-center">{{ user.username }}</h2>
             <hr class="hr-mid">
 
-        
+        {% for monster in user.monsters.all %}
             <section class="Element-heading">
                 <h3>Your Monsters</h3>
 
                <div class="row">
                 <div class="col-lg-9 col-sm-12 col-md-9 col-xs-12">
                  <div class="holder-para">
-                  <h4>Monster Name</h4>
+                  <h4>{{ monster.name  }} the {{ monster.monster_type }}</h4>
                   <hr class="hr-short">
                   <p class="font-2">
                         Monster descrition. 
                         is he who, in the name of charity and good will, shepherds the weak through the valley of darkness, for he is truly his brother’s keeper and the finder of lost children. And I will strike down upon thee with great vengeance and furious anger those who would attempt to poison and destroy My brothers. And you will know My name is the Lord when I 
                   </p>
-                  <p><strong>Health:</strong>input health here.</p>
-                  <p><strong>Defense:</strong>input defense here.</p>
-                  <p><strong>Attach:</strong>input attach here.</p>
-                  <p><strong>Monster Type:</strong>input type here.</p>
-                  <p><strong>Monster ID:</strong>input id here.</p>
+                  <p><strong>Health:</strong>{{ monster.health }}</p>
+                  <p><strong>Defense:</strong>{{ monster.defense }}</p>
+                  <p><strong>Attack:</strong>{{ monster.attack }}</p>
+                  <p><strong>Monster Type:</strong>{{ monster.monster_type }}</p>
                  </div>
                 </div>
                 <div class="col-lg-3 col-xs-12 col-sm-12 col-md-3">
                         <div class="holder-img">
-                          <img class="round-img img-responsive center-block" src={% static 'img/2.jpg' %}>
+                          <img class="round-img img-responsive center-block" src={% static monster.img_file %}>
                         </div>
                 </div>
             </div>
-
             <hr class="line-full">
-
             </section>
-
+        {% endfor %}
          
             <section class="Element-heading">
               <h3>user info</h3>
