@@ -1,8 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse_lazy
 
-# Create your tests here.
-
 
 class MainRoutingTests(TestCase):
     """Tests for the routes in imagersite."""

@@ -40,14 +40,13 @@ class Monster(models.Model):
         User,
         related_name='monsters',
         on_delete=models.CASCADE)
-    img_file = models.ImageField(upload_to='monsters_dir')
+    img_file = models.ImageField()
     name = models.CharField(max_length=30, default=random_name)
     health = models.IntegerField(default=random_stats)
     defense = models.IntegerField(default=random_stats)
     attack = models.IntegerField(default=random_stats)
     monster_type = models.CharField(max_length=100, default=random_type)
-    unique_id = models.BigIntegerField(default=random_id)   
 
     def __str__(self):
         """Render as string."""
-        return self.name
+        return '{} the {}'.format(self.name, self.monster_type)
