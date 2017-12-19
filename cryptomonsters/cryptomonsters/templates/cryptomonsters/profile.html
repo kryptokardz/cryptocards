@@ -37,10 +37,10 @@
             <h2 class="text-center">{{ user.username }}</h2>
             <hr class="hr-mid">
 
-        {% for monster in user.monsters.all %}
             <section class="Element-heading">
-                <h3>Your Monsters</h3>
+                <h3 class="text-center">Your Monsters</h3>
 
+        {% for monster in user.monsters.all %}
                <div class="row">
                 <div class="col-lg-9 col-sm-12 col-md-9 col-xs-12">
                  <div class="holder-para">
@@ -50,10 +50,10 @@
                         Monster descrition. 
                         is he who, in the name of charity and good will, shepherds the weak through the valley of darkness, for he is truly his brother’s keeper and the finder of lost children. And I will strike down upon thee with great vengeance and furious anger those who would attempt to poison and destroy My brothers. And you will know My name is the Lord when I 
                   </p>
-                  <p><strong>Health:</strong>{{ monster.health }}</p>
-                  <p><strong>Defense:</strong>{{ monster.defense }}</p>
-                  <p><strong>Attack:</strong>{{ monster.attack }}</p>
-                  <p><strong>Monster Type:</strong>{{ monster.monster_type }}</p>
+                  <p><strong>Health:</strong> {{ monster.health }}</p>
+                  <p><strong>Defense:</strong> {{ monster.defense }}</p>
+                  <p><strong>Attack:</strong> {{ monster.attack }}</p>
+                  <p><strong>Monster Type:</strong> {{ monster.monster_type }}</p>
                  </div>
                 </div>
                 <div class="col-lg-3 col-xs-12 col-sm-12 col-md-3">
@@ -63,17 +63,17 @@
                 </div>
             </div>
             <hr class="line-full">
-            </section>
         {% endfor %}
+            </section>
          
             <section class="Element-heading">
               <h3>user info</h3>
               <div class="row">
               <div class="col-xs-12 col-lg-12 col-sm-12 col-md-12 blockquote-row">
                   <div class="col-xs-12 col-lg-12 col-sm-12 col-md-12 blockquote-side">
-                    <p><strong>first name:</strong>insert name</p>
-                    <p><strong>last name:</strong>insert name</p>
-                    <p><strong>email:</strong>insert email</p>
+                    <p><strong>first name:</strong> {{ user.first_name }}</p>
+                    <p><strong>last name:</strong> {{ user.last_name }}</p>
+                    <p><strong>email:</strong> {{ user.email }}</p>
                   </div>
               </div>
             </section>
