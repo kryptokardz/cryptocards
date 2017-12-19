@@ -76,7 +76,7 @@
         app_path: /home/ubuntu/cryptocards/cryptomonsters/
         virtualenv: /home/ubuntu/cryptocards
 
-    # - name: restart cryptomonsters
-    #   service:
-    #     name: cryptomonsters
-    #     state: restarted
+    - name: restart cryptomonsters
+      service:
+        name: cryptomonsters
+        state: restarted
