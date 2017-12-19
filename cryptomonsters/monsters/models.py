@@ -22,15 +22,19 @@ def random_id():
     return hash(''.join(fake.words()))
 
 
-class Monster(models.Model):
-    """Create new monster model."""
-
-    TYPES = (
+def random_type():
+    """Return type of monster."""
+    types = (
         ('Slime'),
         ('Skeleton'),
         ('Zombie'),
         ('Minotaur')
     )
+    return types[randint(0, len(types) - 1)]
+
+
+class Monster(models.Model):
+    """Create new monster model."""
 
     user = models.ForeignKey(
         User,
@@ -41,8 +45,8 @@ class Monster(models.Model):
     health = models.IntegerField(default=random_stats)
     defense = models.IntegerField(default=random_stats)
     attack = models.IntegerField(default=random_stats)
-    monster_type = models.CharField(max_length=100, default=choice(TYPES))
-    unique_id = models.BigIntegerField(default=random_id)
+    monster_type = models.CharField(max_length=100, default=random_type)
+    unique_id = models.BigIntegerField(default=random_id)   
 
     def __str__(self):
         """Render as string."""
