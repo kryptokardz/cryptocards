@@ -129,7 +129,6 @@ blockchain = BlockChain()
 def create_monster():
     """."""
     monster = Monster()
-    import pdb; pdb.set_trace()
 
 
 create_monster()
