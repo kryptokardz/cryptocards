@@ -1,4 +1,5 @@
 """."""
+from monsters.models import Monster
 import hashlib
 import datetime as date
 import json
@@ -125,10 +126,12 @@ class BlockChain(object):
 blockchain = BlockChain()
 
 
+def create_monster():
+    """."""
+    monster = Monster()
 
 
-
-
+create_monster()
 
 
 

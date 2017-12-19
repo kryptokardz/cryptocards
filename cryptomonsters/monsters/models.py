@@ -24,6 +24,7 @@ def random_id():
 
 class Monster(models.Model):
     """Create new monster model."""
+
     TYPES = (
         ('Slime'),
         ('Skeleton'),
@@ -45,4 +46,4 @@ class Monster(models.Model):
 
     def __str__(self):
         """Render as string."""
-        return self.title
+        return self.name
