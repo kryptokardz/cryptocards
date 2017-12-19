@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'cryptomonsters',
     'storages',
     'mining',
-    'monsters'
+    'monsters',
 ]
 
 MIDDLEWARE = [

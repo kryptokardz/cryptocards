@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^monsters/', include('monsters.urls')),
     url(r'^mining/', include('mining.urls')),
     url(r'^$', home_view, name='home'),
+
 ]
