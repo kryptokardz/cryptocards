@@ -1,0 +1,12 @@
+{% extends 'cryptomonsters/base.html' %}
+
+
+{% block content %}
+ <div class="wow-btn text-center">
+    <p>Name: {{ data.name }}</p>
+    <p>Health: {{ data.health }}</p>
+    <p>Defense: {{ data.defense }}</p>
+    <p>Attack: {{ data.attack }}</p>
+    <p>id: {{ data.unique_id }}</p>
+</div>
+{% endblock %}
