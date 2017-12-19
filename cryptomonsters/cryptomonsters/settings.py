@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 DEBUG = bool(os.environ.get('DEBUG', ''))
 
 # ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '')
-ALLOWED_HOSTS = ['ec2-34-215-7-234.us-west-2.compute.amazonaws.com', 'localhost']
+ALLOWED_HOSTS = ['ec2-34-215-7-234.us-west-2.compute.amazonaws.com', '127.0.0.1']
 
 # Application definition
 
@@ -72,6 +72,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'cryptomonsters.wsgi.application'
+
+LOGIN_REDIRECT_URL = 'home'
+
+ACCOUNT_ACTIVATION_DAYS = 7
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'cryptomonsterz@gmail.com'
+EMAIL_HOST_PASSWORD = 'hbbnnkjpxzpxewbi'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 
 # Database

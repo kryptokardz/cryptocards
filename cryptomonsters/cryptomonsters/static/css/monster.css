@@ -1,0 +1,14 @@
+input,select,textarea{
+    width: 40%;
+    font-family: 'Lora', serif;
+}
+
+
+.btn-primary{
+    margin-top: -3%;
+    width: 20%;
+}
+
+form{
+    margin-left: 25%;
+}
