@@ -1,18 +1,6 @@
 from __future__ import unicode_literals
 from django.test import TestCase
-from django.contrib.auth.models import User
 from .models import Monster
-import factory
-
-
-class UserFactory(factory.django.DjangoModelFactory):
-    """Create a test User."""
-
-    class Meta:
-        model = User
-
-    username = 'bob'
-    email = 'bob@bob.com'
 
 
 class MonsterModelTestCase(TestCase):
@@ -23,18 +11,24 @@ class MonsterModelTestCase(TestCase):
 
         It makes a User named Bob and gives him a monster.
         """
-        self.user = UserFactory.create()
-        self.user.set_password('password')
-        self.user.save()
-
         self.monster = Monster()
-        self.monster.save()
 
-        self.user.monsters.add(self.monster)
+    def test_monster_name_field(self):
+        """Test that monster name field has something."""
+        assert self.monster.name
 
-    def tearDown(self):
-        """Goes in and deletes our Bob user."""
-        User.objects.get(username='bob').delete()
+    def test_monster_health_field(self):
+        """Test that monster health field contains a number between 1 and 10."""
+        assert self.monster.health in [x for x in range(1, 10)]
 
-    def test_monster_associates_with_user(self):
-        self.assertEqual(self.user.monsters.count(), 1)
+    def test_monster_defense_field(self):
+        """Test that monster defense field contains a number between 1 and 10."""
+        assert self.monster.defense in [x for x in range(1, 10)]
+
+    def test_monster_attack_field(self):
+        """Test that monster attack field contains a number between 1 and 10."""
+        assert self.monster.attack in [x for x in range(1, 10)]
+
+    def test_monster_type_field(self):
+        """Test that monster type field has something."""
+        assert self.monster.monster_type
