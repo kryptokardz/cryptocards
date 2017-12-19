@@ -1,0 +1,8 @@
+{% autoescape off %}
+Dear {{ user }},
+
+You recently registered at {{ site }}.
+To activate your account click on the following link:
+
+http://{{ site }}{% url 'registration_activate' activation_key=activation_key %}
+{% endautoescape %}

@@ -16,6 +16,7 @@ Including another URLconf
 from cryptomonsters.views import home_view
 
 from django.conf.urls import include, url
+from django.contrib.auth import views as auth_views
 from django.contrib import admin
 
 urlpatterns = [
@@ -23,5 +24,8 @@ urlpatterns = [
     url(r'^monsters/', include('monsters.urls')),
     url(r'^mining/', include('mining.urls')),
     url(r'^$', home_view, name='home'),
+    url(r'^login/', auth_views.login, name='login'),
+    url(r'^logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
+    url(r'^accounts/', include('registration.backends.hmac.urls')),
 
 ]
