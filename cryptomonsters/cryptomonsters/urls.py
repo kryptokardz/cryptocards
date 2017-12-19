@@ -20,6 +20,7 @@ from django.contrib.auth import views as auth_views
 from django.contrib import admin
 
 urlpatterns = [
+    url(r'^$', home_view, name='home'),
     url(r'^admin/', admin.site.urls),
     url(r'^monsters/', include('monsters.urls')),
     url(r'^mining/', include('mining.urls')),

@@ -17,7 +17,7 @@ class UserFactory(factory.django.DjangoModelFactory):
                                 '{}{}'.format(factory.Faker('first_name'), n))
     email = factory.Faker('email')
 
-
+   
 class MainRoutingTests(TestCase):
     """Tests for the routes in imagersite."""
 
