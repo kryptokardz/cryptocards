@@ -1,16 +1,32 @@
 """Base views for cryptomonsters."""
 from django.shortcuts import render
+from monsters.models import Monster
 from mining.scripts import blockchain
+from django.views.generic import ListView, DetailView
+import json
 
 
-def miningView(request):
+class MiningHomeView(ListView):
     """."""
-    # request.user.username = 'bob'
-    new_blockchain = blockchain.blockchain.new_block('bob')
-    # import pdb; pdb.set_trace()
-    return render(request, 'mining/mining.html')
+
+    model = Monster
+    template_name = 'mining/mining.html'
 
 
-# TODO: create mining "home" page
-# TODO: page to show monster after monster is mined
-# TODO: finish view route that does the mining
+class MiningNewBlock(ListView):
+    """."""
+
+    model = Monster
+    template_name = 'mining/new_block.html'
+    context_object_name = 'data'
+
+    def get_context_data(self, **kwargs):
+        """."""
+        context = super(MiningNewBlock, self).get_context_data(**kwargs)
+        user = context['view'].request.user
+        monster = json.loads(blockchain.blockchain.new_block(user))
+        context['data'] = monster
+        print(monster)
+        return context
+
+

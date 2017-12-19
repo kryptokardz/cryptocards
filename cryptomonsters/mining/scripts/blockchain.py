@@ -126,22 +126,19 @@ class BlockChain(object):
 def create_monster(user):
     """."""
     monster = Monster()
+    monster.user = user
     monster_info = json.dumps({
-        'name': monster.name,
+        'name': '{} the {}'.format(monster.name, monster.monster_type),
         'health': monster.health,
         'defense': monster.defense,
         'attack': monster.attack,
         'monster_type': monster.monster_type,
-        'unique_id': monster.unique_id,
-        'user': user
+        'unique_id': monster.pk,
+        'user': monster.user.username
     }, sort_keys=True, indent=4,
         separators=(',', ':'))
-    print(monster_info)
     return monster_info
 
 
 blockchain = BlockChain()
-
-
-
 
