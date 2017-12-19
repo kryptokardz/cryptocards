@@ -73,13 +73,13 @@ class BlockChain(object):
         proof = self.proof_of_work(previous_block)
         index = previous_block.index + 1
         monster_id = previous_block.monster_id + 1
-        # TODO: get monster
+        monster = create_monster(user)
         timestamp = date.datetime.now().strftime("%c")
         previous_hash = previous_block.hash
         user = user
         new_block = Block(index, timestamp, previous_hash, user, monster_id, proof)
         self.chain.append(new_block)
-        return self.chain
+        return monster
 
     def proof_of_work(self, prev_block):
         """Run proof of work algorithm to mine to block."""
@@ -123,18 +123,24 @@ class BlockChain(object):
         return sha.hexdigest()
 
 
-# blockchain = BlockChain()
-
-
-def create_monster():
+def create_monster(user):
     """."""
     monster = Monster()
-    print(monster)
+    monster_info = json.dumps({
+        'name': monster.name,
+        'health': monster.health,
+        'defense': monster.defense,
+        'attack': monster.attack,
+        'monster_type': monster.monster_type,
+        'unique_id': monster.unique_id,
+        'user': user
+    }, sort_keys=True, indent=4,
+        separators=(',', ':'))
+    print(monster_info)
+    return monster_info
 
-# create_monster()
 
-
-
+blockchain = BlockChain()
 
 
 
