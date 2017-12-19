@@ -41,7 +41,7 @@ class Block(object):
             'index': self.index,
             'timestamp': self.timestamp,
             'previous_hash': self.previous_hash,
-            'user': self.user,
+            'user': self.user.username,
             'monster_id': self.monster_id,
             'proof': self.proof,
             'hash': self.hash
@@ -73,12 +73,13 @@ class BlockChain(object):
         proof = self.proof_of_work(previous_block)
         index = previous_block.index + 1
         monster_id = previous_block.monster_id + 1
-        monster = create_monster(user)
+        monster = create_monster(user, monster_id)
         timestamp = date.datetime.now().strftime("%c")
         previous_hash = previous_block.hash
         user = user
         new_block = Block(index, timestamp, previous_hash, user, monster_id, proof)
         self.chain.append(new_block)
+        print(new_block.view_block())
         return monster
 
     def proof_of_work(self, prev_block):
@@ -123,22 +124,31 @@ class BlockChain(object):
         return sha.hexdigest()
 
 
-def create_monster(user):
+def create_monster(user, monster_id):
     """."""
+    types = {
+        'Slime': 'img/c_mon2.png',
+        'Skeleton': 'img/c_mon3.png',
+        'Zombie': 'img/c_mon1.png',
+        'Minotaur': 'img/c_mon2.png'
+    }
     monster = Monster()
     monster.user = user
-    monster_info = json.dumps({
-        'name': '{} the {}'.format(monster.name, monster.monster_type),
-        'health': monster.health,
-        'defense': monster.defense,
-        'attack': monster.attack,
-        'monster_type': monster.monster_type,
-        'unique_id': monster.pk,
-        'user': monster.user.username
-    }, sort_keys=True, indent=4,
-        separators=(',', ':'))
-    return monster_info
-
+    monster.img_file = types[monster.monster_type]
+    monster.unique_id = monster_id
+    # monster_info = json.dumps({
+    #     'name': '{} the {}'.format(monster.name, monster.monster_type),
+    #     'health': monster.health,
+    #     'defense': monster.defense,
+    #     'attack': monster.attack,
+    #     'monster_type': monster.monster_type,
+    #     'unique_id': monster.pk,
+    #     'img_file': monster.img_file,
+    #     'user': monster.user.username
+    # }, sort_keys=True, indent=4,
+    #     separators=(',', ':'))
+    # return monster_info
+    return monster
 
 blockchain = BlockChain()
 
