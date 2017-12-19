@@ -25,7 +25,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DEBUG', ''))
 
-ALLOWED_HOSTS = ['127.0.0.1', 'LOCALHOST']
+ALLOWED_HOSTS = ['ec2-34-215-7-234.us-west-2.compute.amazonaws.com',
+                 '34.215.7.234', '127.0.0.1', 'LOCALHOST']
 
 
 # Application definition
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cryptomonsters',
+    'storages'
     'mining',
     'monsters'
 ]
@@ -127,4 +129,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
+
+# Amazon Web Services Configuration
+if not DEBUG:
+    AWS_STORAGE_BUCKET_NAME = 'cryptomonsters'
+    AWS_ACCESS_KEY_ID = os.environ.get('IAM_USER_ACCESS_KEY_ID', '')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('IAM_USER_SECRET_ACCESS_KEY', '')
+    AWS_S3_HOST = 's3-us-west-2.amazonaws.com'
+
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+    STATICFILES_LOCATION = 'static'
+    STATICFILES_STORAGE = 'cryptomonsters.custom_storages.StaticStorage'
+    STATIC_URL = 'https://{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+
+else:
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
