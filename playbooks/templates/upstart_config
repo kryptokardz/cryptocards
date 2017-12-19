@@ -10,8 +10,8 @@ chdir /home/ubuntu/cryptocards/cryptomonsters
 
 env SECRET_KEY='{{ secret_key }}'
 env DEBUG='{{ DEBUG }}'
-env IAM_USER_ACCESS_KEY_ID="AKIAJRV2KEEZBLJKYONQ"
-env IAM_USER_SECRET_ACCESS_KEY="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"
+env IAM_USER_ACCESS_KEY_ID=""
+env IAM_USER_SECRET_ACCESS_KEY=""
 env AWS_STORAGE_BUCKET_NAME='cryptomonsters'
 env DB_USER='{{ DB_USER }}'
 env DB_PASS='{{ DB_PASS }}'
