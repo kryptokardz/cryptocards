@@ -123,15 +123,17 @@ class BlockChain(object):
         return sha.hexdigest()
 
 
-blockchain = BlockChain()
+# blockchain = BlockChain()
 
 
 def create_monster():
     """."""
     monster = Monster()
 
+    print(monster)
 
-create_monster()
+
+# create_monster()
 
 
 
