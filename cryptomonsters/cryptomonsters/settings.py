@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cryptomonsters',
-    'storages'
+    'storages',
     'mining',
-    'monsters'
+    'monsters',
 ]
 
 MIDDLEWARE = [
