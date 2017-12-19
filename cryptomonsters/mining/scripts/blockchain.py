@@ -137,6 +137,7 @@ def create_monster(user):
         'user': monster.user.username
     }, sort_keys=True, indent=4,
         separators=(',', ':'))
+    monster.save()
     return monster_info
 
 

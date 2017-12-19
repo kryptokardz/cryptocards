@@ -26,7 +26,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 DEBUG = bool(os.environ.get('DEBUG', ''))
 
 # ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '')
-ALLOWED_HOSTS = ['ec2-34-215-7-234.us-west-2.compute.amazonaws.com', '127.0.0.1']
+ALLOWED_HOSTS = ['ec2-34-215-7-234.us-west-2.compute.amazonaws.com',
+                 '127.0.0.1', 'LOCALHOST']
 
 # Application definition
 
