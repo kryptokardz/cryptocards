@@ -53,7 +53,7 @@ class Monster(models.Model):
     monster_type = models.CharField(max_length=100, default=random_type)
     unique_id = models.IntegerField(default=0)
     img_file = models.ImageField()
-    monster_story = models.TextField(blank=True)
+    monster_story = models.TextField(default='')
 
     def __str__(self):
         """Render as string."""
