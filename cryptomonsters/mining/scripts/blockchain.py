@@ -169,6 +169,7 @@ def create_monster(user):
     monster.img_file = types[monster.monster_type]
     monster.save()
     monster.unique_id = monster.pk
+    monster.save()
     return monster
 
 
