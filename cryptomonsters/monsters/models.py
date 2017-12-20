@@ -28,7 +28,13 @@ def random_type():
         ('Slime'),
         ('Skeleton'),
         ('Zombie'),
-        ('Minotaur')
+        ('Blue Wizard'),
+        ('Red Wizard'),
+        ('Bear'),
+        ('Wolf'),
+        ('Barbarian'),
+        ('Minotaur'),
+        ('Goblin'),
     )
     return choice(types)
 
@@ -47,6 +53,7 @@ class Monster(models.Model):
     monster_type = models.CharField(max_length=100, default=random_type)
     unique_id = models.IntegerField(default=0)
     img_file = models.ImageField()
+    monster_story = models.TextField(blank=True)
 
     def __str__(self):
         """Render as string."""
