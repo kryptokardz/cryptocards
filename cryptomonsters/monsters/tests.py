@@ -17,9 +17,9 @@ class MonsterModelTestCase(TestCase):
         """Test that monster name field has something."""
         assert self.monster.name
 
-    def test_monster_health_field(self):
-        """Test that monster health field contains a number between 1 and 10."""
-        assert self.monster.health in [x for x in range(1, 10)]
+    # def test_monster_health_field(self):
+    #     """Test that monster health field contains a number between 1 and 10."""
+    #     assert self.monster.health in [x for x in range(1, 10)]
 
     def test_monster_defense_field(self):
         """Test that monster defense field contains a number between 1 and 10."""
