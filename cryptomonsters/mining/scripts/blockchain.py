@@ -17,11 +17,11 @@ class Block(object):
         self.user = user
         self.monster_data = monster_data
         self.proof = proof
-        self.hash = self.block_hash()
+        self.hash = self._block_hash()
 
-        self.update_chain()
+        self._update_chain()
 
-    def block_hash(self):
+    def _block_hash(self):
         """Hash all of the attributes for the current block."""
         sha = hashlib.sha256()
         index = str(self.index).encode('utf8')
@@ -52,7 +52,7 @@ class Block(object):
             separators=(',', ':'))
         return block
 
-    def update_chain(self):
+    def _update_chain(self):
         """."""
         block = {
             'index': self.index,
