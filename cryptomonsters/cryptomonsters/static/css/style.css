@@ -442,6 +442,20 @@ textarea{
     color: black;
     font-size: 14px;
 }
+.update_form label{
+        padding-top: 2%;
+        display: block;
+    }
+.update_form span{
+        display: block;
+    }
+.update_form input{
+    margin: 0;
+    width: 60%;
+}
+.update_form button{
+    margin-top: 3%;
+    } 
 @media screen and (min-width: 481px) and (max-width: 1200px) {
 
    .block{
@@ -463,6 +477,14 @@ textarea{
     }
     .footer-p2 a{
     font-size: 12px;
+    }
+    .update_form label{
+        padding-top: 2%;
+        display: block;
+        margin: 0;
+    }
+    .update_form span{
+        display: block;
     }
 }
 
@@ -565,6 +587,17 @@ textarea{
     h6{
         font-size: 100%;
     }
+    .update_form label{
+        padding-top: 2%;
+        display: block;
+    }
+    .update_form input{
+        width: 75%;
+        margin: 0px;
+    }
+    .update_form span{
+        display: block;
+    }
 }
 
 /*This section for small height device*/
@@ -597,5 +630,15 @@ textarea{
          padding-top:10vh;
          padding-bottom:4vh;
     }
-    
+    .update_form label{
+        padding-top: 2%;
+        display: block;
+    }
+    .update_form input{
+        width: 75%;
+        margin: 0px;
+]    }
+    .update_form span{
+        display: block;
+    }   
 }

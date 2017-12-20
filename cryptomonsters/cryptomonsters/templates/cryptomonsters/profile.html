@@ -30,6 +30,7 @@
 
 {% endblock %}
 
+
 {% block content %}
 
    <section class="element-page">
@@ -49,11 +50,12 @@
                   <p class="font-2">
                         Monster descrition. 
                         is he who, in the name of charity and good will, shepherds the weak through the valley of darkness, for he is truly his brother’s keeper and the finder of lost children. And I will strike down upon thee with great vengeance and furious anger those who would attempt to poison and destroy My brothers. And you will know My name is the Lord when I 
+                  <p><strong>Monster Type:</strong> {{ monster.monster_type }}</p>
                   </p>
                   <p><strong>Health:</strong> {{ monster.health }}</p>
                   <p><strong>Defense:</strong> {{ monster.defense }}</p>
                   <p><strong>Attack:</strong> {{ monster.attack }}</p>
-                  <p><strong>Monster Type:</strong> {{ monster.monster_type }}</p>
+                  <p><strong>Unique Id:</strong> {{ monster.unique_id }}</p>
                  </div>
                 </div>
                 <div class="col-lg-3 col-xs-12 col-sm-12 col-md-3">
@@ -80,11 +82,10 @@
             <section class="Element-heading">
                   <div class="row btn-line">
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-11">
-                      <a class="btn btn-default call-btn-1" href="#">edit account</a>
+                      <a class="btn btn-default call-btn-1" href="{% url 'updateuser' %}">edit account</a>
                     </div>
                   </div>
             </section>
-            
         </section>
 
 {% endblock %}
