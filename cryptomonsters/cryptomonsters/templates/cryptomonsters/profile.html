@@ -38,8 +38,8 @@
             <h2 class="text-center">{{ user.username }}</h2>
             <hr class="hr-mid">
 
-            <section class="Element-heading">
-                <h3 class="text-center">Your Monsters</h3>
+        <section class="Element-heading">
+            <h3 class="text-center">Your Monsters</h3>
 
         {% for monster in user.monsters.all %}
                <div class="row">
@@ -65,8 +65,10 @@
                 </div>
             </div>
             <hr class="line-full">
+
         {% endfor %}
-            </section>
+
+        </section>
          
             <section class="Element-heading">
               <h3>user info</h3>
@@ -86,6 +88,7 @@
                     </div>
                   </div>
             </section>
+          </div>
         </section>
 
 {% endblock %}

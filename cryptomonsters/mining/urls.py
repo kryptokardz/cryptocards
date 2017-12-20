@@ -1,5 +1,6 @@
-"""."""
+"""Mining views."""
 from django.conf.urls import url
+
 from mining import views
 
 urlpatterns = [

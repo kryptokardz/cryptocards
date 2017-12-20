@@ -1,0 +1,67 @@
+{% extends 'cryptomonsters/base.html' %}
+
+{% load static %}
+
+{% block nav %}
+
+<div class="overlay" id="overlay" onclick="closeNav()"></div>
+    
+        <div class="head-bar">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6">
+                    {# <a href="index.html"><img class="img-responsive" src={% static 'img/logo.png' %} ></a> #}
+                </div>
+                <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right">
+                    <div id="mySidenav" class="sidenav text-center">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br>
+                        <a href="{% url 'home' %}">Home</a><hr>
+                        <a href="{% url 'profile' %}">Profile</a><hr>
+                        <a href="element.html">Element</a>
+                    </div>
+                    <div class="main" id="main">
+                      <a href="#" onclick="openNav()">MENU &#9776;</a>
+                    </div>
+                </div>
+              </div>
+              <hr>
+            </div>
+        </div>
+
+{% endblock %}
+
+
+{% block content %}
+
+   <section class="element-page">
+          <div class="all_mons container">
+            <h2 class="text-center">Living Monsters</h2>
+            <hr class="hr-mid">
+
+        {% for monster in monsters %}
+            <div class="monster">
+               <div class="monster_info">
+                 <div class="holder-para">
+                <div class="">
+                        <div class="holder-img">
+                          <img class="round-img img-responsive center-block" src={% static monster.img_file %}>
+                        </div>
+                </div>
+                  <h4>{{ monster.name  }} the {{ monster.monster_type }}</h4>
+                  {# <p class="font-2"> #}
+                        {# Monster descrition.  #}
+                        {# is he who, in the name of charity and good will, shepherds the weak through the valley of darkness, for he is truly his brother’s keeper and the finder of lost children. And I will strike down upon thee with great vengeance and furious anger those who would attempt to poison and destroy My brothers. And you will know My name is the Lord when I  #}
+                  {# </p> #}
+                  <p><strong>Monster Type:</strong> {{ monster.monster_type }}</p>
+                  <p><strong>Health:</strong> {{ monster.health }}</p>
+                  <p><strong>Defense:</strong> {{ monster.defense }}</p>
+                  <p><strong>Attack:</strong> {{ monster.attack }}</p>
+                  <p><strong>Unique Id:</strong> {{ monster.unique_id }}</p>
+                 </div>
+            </div>
+          </div>
+        {% endfor %}
+          </div>
+        </section>
+
+{% endblock %}
