@@ -176,6 +176,7 @@ def create_monster(user):
         'Bear': 'img/c_mon7.png',
         'Barbarian': 'img/c_mon8.png',
         'Minotaur': 'img/c_mon9.png',
+        'Goblin': 'img/c_mon10.png',
     }
     monster = Monster()
     monster.user = user

@@ -33,7 +33,8 @@ def random_type():
         ('Bear'),
         ('Wolf'),
         ('Barbarian'),
-        ('Minotar'),
+        ('Minotaur'),
+        ('Goblin'),
     )
     return choice(types)
 
