@@ -1,0 +1,5 @@
+[run]
+omit = ../*migrations*
+        *cryptomonsters/settings.py*
+        *mining/admin.py*
+        *monsters/admin.py*
