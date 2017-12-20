@@ -70,10 +70,10 @@ class Block(object):
             with open('cryptomonsters/static/blockchain/blockchain.json', 'w') as file:
                 json.dump(chain, file)
         else:
-            with open(settings.STATIC_URL + 'blockchain.json') as file:
+            with open(settings.STATIC_URL + 'blockchain/blockchain.json') as file:
                 chain = json.load(file)
             chain.append(block)
-            with open(settings.STATIC_URL + 'blockchain.json', 'w') as file:
+            with open(settings.STATIC_URL + 'blockchain/blockchain.json', 'w') as file:
                 json.dump(chain, file)
 
 
