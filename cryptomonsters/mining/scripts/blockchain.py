@@ -135,7 +135,6 @@ def create_monster(user, monster_id):
     monster = Monster()
     monster.user = user
     monster.img_file = types[monster.monster_type]
-    monster.unique_id = monster_id
     # monster_info = json.dumps({
     #     'name': '{} the {}'.format(monster.name, monster.monster_type),
     #     'health': monster.health,
@@ -149,7 +148,8 @@ def create_monster(user, monster_id):
     #     separators=(',', ':'))
     # return monster_info
     monster.save()
+    monster.unique_id = monster.pk
     return monster
 
-blockchain = BlockChain()
+# blockchain = BlockChain()
 

@@ -1,9 +1,11 @@
 """Base views for cryptomonsters."""
 from django.shortcuts import render
 from monsters.models import Monster
-from mining.scripts import blockchain
+from mining.scripts.blockchain import BlockChain
 from django.views.generic import ListView, DetailView
 import json
+
+blockchain = BlockChain()
 
 
 class MiningHomeView(ListView):
@@ -25,7 +27,7 @@ class MiningNewBlock(ListView):
         context = super(MiningNewBlock, self).get_context_data(**kwargs)
         user = context['view'].request.user
         # monster = json.loads(blockchain.blockchain.new_block(user))
-        monster = blockchain.blockchain.new_block(user)
+        monster = blockchain.new_block(user)
         context['data'] = monster
         # import pdb; pdb.set_trace()
         return context
