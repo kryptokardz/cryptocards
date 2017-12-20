@@ -28,7 +28,10 @@ def random_type():
         ('Slime'),
         ('Skeleton'),
         ('Zombie'),
-        ('Minotaur')
+        ('Blue Wizard'),
+        ('Red Wizard'),
+        ('Bear'),
+        ('Wolf'),
     )
     return choice(types)
 

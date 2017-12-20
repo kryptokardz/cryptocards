@@ -170,7 +170,10 @@ def create_monster(user):
         'Slime': 'img/c_mon2.png',
         'Skeleton': 'img/c_mon3.png',
         'Zombie': 'img/c_mon1.png',
-        'Minotaur': 'img/c_mon2.png'
+        'Blue Wizard': 'img/c_mon6.png',
+        'Red Wizard': 'img/c_mon5.png',
+        'Bear': 'img/c_mon7.png',
+        'Wolf': 'img/c_mon4.png'
     }
     monster = Monster()
     monster.user = user
@@ -178,5 +181,3 @@ def create_monster(user):
     monster.save()
     monster.unique_id = monster.pk
     return monster
-
-
