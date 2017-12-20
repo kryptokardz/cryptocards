@@ -1,0 +1,25 @@
+[run]
+omit =
+    */migrations/*
+    */admin.py
+    */permissions.py
+    */apps.py
+    */__init__.py
+    */tests.py
+    */manage.py
+    */wsgi.py
+    */settings.py
+    */custom_storages.py
+    */monsters/tests.py 
+    */monsters/apps.py
+    */mining/tests.py
+    */mining/apps.py 
+    */cryptomonsters/wsgi.py
+    */cryptomonsters/custom_storages.py
+
+
+source =
+   cryptomonsters
+
+[report]
+show_missing = True
