@@ -12,3 +12,6 @@ input,select,textarea{
 form{
     margin-left: 25%;
 }
+.foot-img{
+    max-width: 50%;
+}

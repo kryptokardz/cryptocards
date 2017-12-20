@@ -75,15 +75,17 @@ TEMPLATES = [
 WSGI_APPLICATION = 'cryptomonsters.wsgi.application'
 
 LOGIN_REDIRECT_URL = 'home'
-
 ACCOUNT_ACTIVATION_DAYS = 7
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'cryptomonsterz@gmail.com'
-EMAIL_HOST_PASSWORD = 'hbbnnkjpxzpxewbi'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = 'cryptomonsterz@gmail.com'
+    EMAIL_HOST_PASSWORD = 'hbbnnkjpxzpxewbi'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
 
 
 # Database

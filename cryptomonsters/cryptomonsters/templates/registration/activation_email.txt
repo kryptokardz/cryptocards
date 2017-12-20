@@ -1,8 +1,14 @@
 {% autoescape off %}
-Dear {{ user }},
+Hello there!
 
-You recently registered at {{ site }}.
-To activate your account click on the following link:
+Thank you for creating a Cryptomonsters account. You are almost all set to get started mining those monsters!
 
+To complete your registration you just need to click the following link:
 http://{{ site }}{% url 'registration_activate' activation_key=activation_key %}
+
+If clicking the link above doesn't work, please copy and paste the URL in a new browser
+window instead.
+
+Sincerely,
+The Cryptomonster Team
 {% endautoescape %}
