@@ -16,4 +16,5 @@ class MonstersView(ListView):
 
     def get_queryset(self):
         """Request users profile."""
+        import pdb; pdb.set_trace()
         return Monster.objects.all()
