@@ -239,3 +239,51 @@ class MainRoutingTests(TestCase):
             'email': 'bob@email.com'
         })
         self.assertIn(b'username already exists', response.content)
+
+    def test_profile_view_shows_username(self):
+        """Test username on profile page after login."""
+        self.client.post(reverse_lazy('login'), {
+            'username': 'bob',
+            'password': 'password'
+        }, follow=True)
+        response = self.client.get(reverse_lazy('profile'))
+        self.assertIn(b'<p><strong>email:</strong> bob@bob.net</p>',
+                      response.content)
+
+    def test_user_template_used_on_update_page(self):
+        """Test successful user update redirects to profile page."""
+        self.client.post(reverse_lazy('login'), {
+            'username': 'bob',
+            'password': 'password'
+        }, follow=True)
+        response = self.client.get(reverse_lazy('updateuser'))
+        self.assertTemplateUsed(response,
+                                'cryptomonsters/user_update_form.html')
+
+    def test_user_update_redirects_to_profile(self):
+        """Test successful user update redirects to profile page."""
+        self.client.post(reverse_lazy('login'), {
+            'username': 'bob',
+            'password': 'password'
+        }, follow=True)
+        response = self.client.post(reverse_lazy('updateuser'), {
+            'email': 'boberino@bob.com'
+        }, follow=True)
+        self.assertTemplateUsed(response, 'cryptomonsters/profile.html')
+
+    def test_update_user_info(self):
+        """Test username on profile page after login."""
+        self.client.post(reverse_lazy('login'), {
+            'username': 'bob',
+            'password': 'password'
+        }, follow=True)
+        response = self.client.post(reverse_lazy('updateuser'), {
+            'email': 'boberino@bob.com'
+        }, follow=True)
+        self.assertIn(b'boberino@bob.com', response.content)
+
+    def test_update_user_if_not_logged_in_redirects_to_login(self):
+        """Test update user page redirects to login if not logged in."""
+        response = self.client.get(reverse_lazy('updateuser'), follow=True)
+        self.assertTemplateUsed(response,
+                                'registration/login.html')
