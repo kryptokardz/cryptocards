@@ -21,7 +21,7 @@
         clone: yes
         repo: https://github.com/kryptokardz/cryptocards.git
         dest: /home/ubuntu/cryptocards
-        version: blockchain
+        version: mark_tues
 
     - name: create python3 virtual enviroment
       command: python3 -m venv /home/ubuntu/cryptocards
@@ -76,17 +76,17 @@
         app_path: /home/ubuntu/cryptocards/cryptomonsters/
         virtualenv: /home/ubuntu/cryptocards
 
-    # - name: migrate rds
-    #   environment:
-    #     DB_HOST: "{{ lookup('ENV', 'DB_HOST') }}"
-    #     DB_USER: "{{ lookup('ENV', 'DB_USER') }}"
-    #     DB_PASS: "{{ lookup('ENV', 'DB_PASS') }}"
-    #     DB_NAME: "{{ lookup('ENV', 'DB_NAME') }}"
-    #     SECRET_KEY: "{{ lookup('ENV', 'SECRET_KEY') }}"
-    #   django_manage: 
-    #     command: migrate
-    #     app_path: /home/ubuntu/cryptocards/cryptomonsters/
-    #     virtualenv: /home/ubuntu/cryptocards
+    - name: migrate rds
+      environment:
+        DB_HOST: "{{ lookup('ENV', 'DB_HOST') }}"
+        DB_USER: "{{ lookup('ENV', 'DB_USER') }}"
+        DB_PASS: "{{ lookup('ENV', 'DB_PASS') }}"
+        DB_NAME: "{{ lookup('ENV', 'DB_NAME') }}"
+        SECRET_KEY: "{{ lookup('ENV', 'SECRET_KEY') }}"
+      django_manage: 
+        command: migrate
+        app_path: /home/ubuntu/cryptocards/cryptomonsters/
+        virtualenv: /home/ubuntu/cryptocards
 
     - name: restart cryptomonsters
       service:

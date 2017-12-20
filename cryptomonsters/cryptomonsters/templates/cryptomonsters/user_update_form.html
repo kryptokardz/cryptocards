@@ -1,7 +1,9 @@
+
 {% extends 'cryptomonsters/base.html' %}
 
 {% block nav %}
-<div class="overlay" id="overlay" onclick="closeNav()"></div>
+
+    <div class="overlay" id="overlay" onclick="closeNav()"></div>
     
         <div class="head-bar">
             <div class="container">
@@ -24,17 +26,23 @@
               <hr>
             </div>
         </div>
+
 {% endblock %}
 
-{% block title %}Register{% endblock %}
+
 
 {% block content %}
+
+{% load static %}
+
 <div class="update_form">
-  <h2 style="text-align:center;">Register</h2><hr>
-  <form method="post">
+<form action="" method="post" style="margin-top: 100px;">
     {% csrf_token %}
+
     {{ form.as_p }}
-    <input type="submit" value="Register" class="btn btn-default call-btn-1"/>
-  </form>
-  </div>
+
+    <input type="submit" value="Update" class="btn btn-default call-btn-1"/>
+</form>
+</div>
+
 {% endblock %}

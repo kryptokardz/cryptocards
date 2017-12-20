@@ -1,25 +1,33 @@
 """Base views for cryptomonsters."""
+import json
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from monsters.models import Monster
+from django.views.generic import DetailView, ListView
+
 from mining.scripts.blockchain import BlockChain
 from django.views.generic import ListView, DetailView
+from monsters.models import Monster
+
 
 blockchain = BlockChain()
 
 
-class MiningHomeView(ListView):
+class MiningHomeView(LoginRequiredMixin, ListView):
     """."""
 
     model = Monster
     template_name = 'mining/mining.html'
+    redirect_field_name = '/accounts/login'
 
 
-class MiningNewBlock(ListView):
+class MiningNewBlock(LoginRequiredMixin, ListView):
     """."""
 
     model = Monster
     template_name = 'mining/new_block.html'
     context_object_name = 'data'
+    redirect_field_name = '/accounts/login'
 
     def get_context_data(self, **kwargs):
         """."""
@@ -28,4 +36,3 @@ class MiningNewBlock(ListView):
         monster = blockchain.new_block(user)
         context['data'] = monster
         return context
-
