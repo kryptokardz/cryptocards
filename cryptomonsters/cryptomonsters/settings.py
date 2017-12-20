@@ -153,7 +153,7 @@ USE_TZ = True
 
 
 # Amazon Web Services Configuration
-if DEBUG:
+if not DEBUG:
     AWS_STORAGE_BUCKET_NAME = 'cryptomonsters'
     AWS_ACCESS_KEY_ID = os.environ.get('IAM_USER_ACCESS_KEY_ID', '')
     AWS_SECRET_ACCESS_KEY = os.environ.get('IAM_USER_SECRET_ACCESS_KEY', '')
