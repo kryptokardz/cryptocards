@@ -21,7 +21,7 @@
         clone: yes
         repo: https://github.com/kryptokardz/cryptocards.git
         dest: /home/ubuntu/cryptocards
-        version: blockchain
+        version: mark_tues
 
     - name: create python3 virtual enviroment
       command: python3 -m venv /home/ubuntu/cryptocards
