@@ -7,17 +7,22 @@ from random import randint, choice
 fake = Faker()
 
 
-def _random_name():
+def random_name():
     """Return a random first name using Faker."""
     return fake.first_name()
 
 
-def _random_stats():
+def random_stats():
     """Return a random integer between 1 and 10 using Faker."""
     return randint(1, 10)
 
 
-def _random_type():
+def random_id():
+    """Return the hashed value of a group of random words generated using Faker."""
+    return hash(''.join(fake.words()))
+
+
+def random_type():
     """Return type of monster."""
     types = (
         ('Slime'),
@@ -41,13 +46,14 @@ class Monster(models.Model):
         User,
         related_name='monsters',
         on_delete=models.CASCADE)
-    name = models.CharField(max_length=30, default=_random_name)
-    health = models.IntegerField(default=_random_stats)
-    defense = models.IntegerField(default=_random_stats)
-    attack = models.IntegerField(default=_random_stats)
-    monster_type = models.CharField(max_length=100, default=_random_type)
+    name = models.CharField(max_length=30, default=random_name)
+    health = models.IntegerField(default=random_stats)
+    defense = models.IntegerField(default=random_stats)
+    attack = models.IntegerField(default=random_stats)
+    monster_type = models.CharField(max_length=100, default=random_type)
     unique_id = models.IntegerField(default=0)
     img_file = models.ImageField()
+    monster_story = models.TextField(blank=True)
 
     def __str__(self):
         """Render as string."""

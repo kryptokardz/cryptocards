@@ -1,6 +1,7 @@
 """."""
 from django.conf import settings
 from monsters.models import Monster
+import monsters.scripts.stories as story
 import datetime as date
 import hashlib
 import json
@@ -179,8 +180,21 @@ def create_monster(user):
         'Goblin': 'img/c_mon10.png',
     }
     monster = Monster()
+    backstory = {
+        'Zombie': story.zombie_story(monster.name),
+        'Slime': story.slime_story(monster.name),
+        'Skeleton': story.skeleton_story(monster.name),
+        'Wolf': story.wolf_story(),
+        'Red Wizard': story.wizard_story(monster.name),
+        'Blue Wizard': story.wizard_story(monster.name),
+        'Bear': story.bear_story(monster.name),
+        'Barbarian': story.barbarian_story(monster.name),
+        'Minotaur': story.minotaur_story(monster.name),
+        'Goblin': story.goblin_story(monster.name),
+    }
     monster.user = user
     monster.img_file = types[monster.monster_type]
+    monster.monster_story = backstory[monster.monster_type]
     monster.save()
     monster.unique_id = monster.pk
     return monster
