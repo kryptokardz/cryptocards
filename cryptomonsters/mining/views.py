@@ -1,12 +1,9 @@
 """Base views for cryptomonsters."""
-import json
-
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
-from django.views.generic import DetailView, ListView
+from django.views.generic import ListView
 
 from mining.scripts.blockchain import BlockChain
-from django.views.generic import ListView, DetailView
+
 from monsters.models import Monster
 
 

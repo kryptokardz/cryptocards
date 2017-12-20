@@ -1,8 +1,9 @@
-from cryptomonsters.views import home_view
+"""Monsters url."""
+from django.conf.urls import url
 
-from django.conf.urls import include, url
-from django.contrib import admin
+from monsters import views
+
 
 urlpatterns = [
-    url(r'^$', home_view, name='home'),
+    url(r'^$', views.MonstersView.as_view(), name='all_monsters'),
 ]
