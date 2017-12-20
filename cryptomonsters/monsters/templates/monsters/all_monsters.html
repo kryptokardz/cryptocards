@@ -9,13 +9,16 @@
             <h2 class="text-center">Living Monsters</h2>
             <hr class="hr-mid">
 
+{# template for each monster #}
+
         {% for monster in monsters %}
             <div class="monster">
                <div class="monster_info">
                  <div class="holder-para">
                 <div class="">
                         <div class="holder-img">
-                          <img class="round-img img-responsive center-block" src={% static monster.img_file %}>
+                          {# <img class="round-img img-responsive center-block" src={% static monster.img_file %}> #}
+                          <p>{{ monster.img_file }}</p>
                         </div>
                 </div>
                   <h4>{{ monster.name  }} the {{ monster.monster_type }}</h4>
@@ -32,6 +35,18 @@
             </div>
           </div>
         {% endfor %}
+
+
+      <div style="text-align: center;">
+        {% for page_num in paginator.page_range %}
+          {% if page_num == page_obj.number %}
+            <a href="?page={{ page_num }}" style="color: gray">{{ page_num }}</a>
+          {% else %}
+            <a href="?page={{ page_num }}">{{ page_num }}</a>
+          {% endif %}
+        {% endfor %}
+      </div>
+
           </div>
         </section>
 
