@@ -65,28 +65,28 @@
         src: templates/upstart_config
         dest: /etc/init/cryptomonsters.conf
 
-    # - name: collect static files
-    #   environment:
-    #     SECRET_KEY: "{{ lookup('ENV', 'SECRET_KEY') }}"
-    #     DEBUG: ''
-    #     IAM_USER_ACCESS_KEY_ID: "{{ lookup('ENV', 'IAM_USER_ACCESS_KEY_ID') }}"
-    #     IAM_USER_SECRET_ACCESS_KEY: "{{ lookup('ENV', 'IAM_USER_SECRET_ACCESS_KEY') }}"
-    #   django_manage: 
-    #     command: collectstatic
-    #     app_path: /home/ubuntu/cryptocards/cryptomonsters/
-    #     virtualenv: /home/ubuntu/cryptocards
+    - name: collect static files
+      environment:
+        SECRET_KEY: "{{ lookup('ENV', 'SECRET_KEY') }}"
+        DEBUG: ''
+        IAM_USER_ACCESS_KEY_ID: "{{ lookup('ENV', 'IAM_USER_ACCESS_KEY_ID') }}"
+        IAM_USER_SECRET_ACCESS_KEY: "{{ lookup('ENV', 'IAM_USER_SECRET_ACCESS_KEY') }}"
+      django_manage: 
+        command: collectstatic
+        app_path: /home/ubuntu/cryptocards/cryptomonsters/
+        virtualenv: /home/ubuntu/cryptocards
 
-    # - name: migrate rds
-    #   environment:
-    #     DB_HOST: "{{ lookup('ENV', 'DB_HOST') }}"
-    #     DB_USER: "{{ lookup('ENV', 'DB_USER') }}"
-    #     DB_PASS: "{{ lookup('ENV', 'DB_PASS') }}"
-    #     DB_NAME: "{{ lookup('ENV', 'DB_NAME') }}"
-    #     SECRET_KEY: "{{ lookup('ENV', 'SECRET_KEY') }}"
-    #   django_manage: 
-    #     command: migrate
-    #     app_path: /home/ubuntu/cryptocards/cryptomonsters/
-    #     virtualenv: /home/ubuntu/cryptocards
+    - name: migrate rds
+      environment:
+        DB_HOST: "{{ lookup('ENV', 'DB_HOST') }}"
+        DB_USER: "{{ lookup('ENV', 'DB_USER') }}"
+        DB_PASS: "{{ lookup('ENV', 'DB_PASS') }}"
+        DB_NAME: "{{ lookup('ENV', 'DB_NAME') }}"
+        SECRET_KEY: "{{ lookup('ENV', 'SECRET_KEY') }}"
+      django_manage: 
+        command: migrate
+        app_path: /home/ubuntu/cryptocards/cryptomonsters/
+        virtualenv: /home/ubuntu/cryptocards
 
     - name: restart cryptomonsters
       service:
