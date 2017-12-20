@@ -22,14 +22,9 @@
 <body>
 <!-- div used to make the body blur -->
 
-  {% block nav %}
+  {% block nav %}{% include 'cryptomonsters/navbar.html'%}{% endblock %}
 
-  {% endblock %}
-
- {% block content %}
-
-
- {% endblock %}
+ {% block content %}{% endblock %}
 
     <section class="social">
       {# <ul> #}
