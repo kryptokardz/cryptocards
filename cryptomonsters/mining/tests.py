@@ -3,8 +3,6 @@ from django.test import TestCase
 from django.urls import reverse_lazy
 from .scripts.blockchain import BlockChain
 
-# Create your tests here.
-
 
 class MainRoutingTests(TestCase):
     """Tests for the routes in imagersite."""
@@ -18,7 +16,6 @@ class MainRoutingTests(TestCase):
         """Test that mining route has a contenton the page."""
         response = self.client.get(reverse_lazy('mining'))
         self.assertIn(b'Cryptomonsters', response.content)
-
 
 
 class BlockChainTest(TestCase):
