@@ -167,13 +167,15 @@ class BlockChain(object):
 def create_monster(user):
     """."""
     types = {
+        'Zombie': 'img/c_mon1.png',
         'Slime': 'img/c_mon2.png',
         'Skeleton': 'img/c_mon3.png',
-        'Zombie': 'img/c_mon1.png',
-        'Blue Wizard': 'img/c_mon6.png',
+        'Wolf': 'img/c_mon4.png',
         'Red Wizard': 'img/c_mon5.png',
+        'Blue Wizard': 'img/c_mon6.png',
         'Bear': 'img/c_mon7.png',
-        'Wolf': 'img/c_mon4.png'
+        'Barbarian': 'img/c_mon8.png',
+        'Minotaur': 'img/c_mon9.png',
     }
     monster = Monster()
     monster.user = user
