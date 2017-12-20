@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_nose',
     'cryptomonsters',
     'storages',
     'mining',
@@ -55,6 +56,14 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'cryptomonsters.urls'
+
+# Use nose to run all tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=cryptomonsters,mining,monsters',
+]
 
 TEMPLATES = [
     {
