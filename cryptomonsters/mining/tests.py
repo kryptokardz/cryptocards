@@ -1,6 +1,7 @@
 """."""
 from django.test import TestCase
 from .scripts.blockchain import BlockChain
+import json
 
 
 class BlockChainTest(TestCase):
@@ -28,13 +29,17 @@ class BlockChainTest(TestCase):
     def test_size_one_on_init(self):
         """."""
         blockchain = BlockChain()
-        self.assertEqual(len(blockchain.chain), 1)
+        with open('cryptomonsters/static/blockchain/blockchain.json') as file:
+            chain = json.load(file)
+        self.assertEqual(len(blockchain.chain), len(chain))
 
     def test_add_new_block(self):
         """."""
         blockchain = BlockChain()
+        with open('cryptomonsters/static/blockchain/blockchain.json') as file:
+            chain = json.load(file)
         blockchain.new_block('bob')
-        self.assertEqual(len(blockchain.chain), 2)
+        self.assertEqual(len(blockchain.chain), len(chain))
 
     def test_add_new_blocks_user(self):
         """."""

@@ -62,7 +62,7 @@ Application is served on http://localhost:8000
 ## Testing
 You can test this application by first exporting an environmental variable pointing to the location of a testing database, then running the `test` command from `manage.py`.
 ```
-(ENV) cryptocards $ export TEST_DB='test_cryptomonsters'
+(ENV) cryptocards $ export TEST_DB='cryptotests'
 (ENV) cryptocards $ python cryptomonsters/manage.py test cryptomonsters
 ```
 
