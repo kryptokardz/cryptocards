@@ -71,10 +71,10 @@ class Block(object):
                 json.dump(chain, file)
         else:
             # import pdb; pdb.set_trace()
-            with open(settings.ALLOWED_HOSTS[0] + '/static/blockchain/blockchain.json') as file:
+            with open('cryptomonsters/static/blockchain/blockchain.json') as file:
                 chain = json.load(file)
             chain.append(block)
-            with open(settings.ALLOWED_HOSTS[0] + '/static/blockchain/blockchain.json', 'w') as file:
+            with open('cryptomonsters/static/blockchain/blockchain.json', 'w') as file:
                 json.dump(chain, file)
 
 

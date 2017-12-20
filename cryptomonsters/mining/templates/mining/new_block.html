@@ -32,7 +32,7 @@
 
 {% block content %}
  <div class="wow-btn text-center">
-    <img src="{% static  data.img_file  %}" width="250" height="250" />
+    <img src="{% static  data.img_file.url  %}" width="250" height="250" />
     <p>Name: {{ data.name }} the {{ data.monster_type }}</p>
     <p>Health: {{ data.health }}</p>
     <p>Defense: {{ data.defense }}</p>
