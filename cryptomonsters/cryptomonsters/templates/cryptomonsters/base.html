@@ -22,6 +22,8 @@
 <body>
 <!-- div used to make the body blur -->
 
+<div class="overlay" id="overlay" onclick="closeNav()"></div>
+
   {% block nav %}{% include 'cryptomonsters/navbar.html'%}{% endblock %}
 
  {% block content %}{% endblock %}

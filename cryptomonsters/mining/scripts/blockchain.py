@@ -197,4 +197,5 @@ def create_monster(user):
     monster.monster_story = backstory[monster.monster_type]
     monster.save()
     monster.unique_id = monster.pk
+    monster.save()
     return monster
