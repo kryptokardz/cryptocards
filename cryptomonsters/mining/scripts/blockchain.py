@@ -1,7 +1,9 @@
 """."""
+from django.conf import settings
 from monsters.models import Monster
-import hashlib
+import monsters.scripts.stories as story
 import datetime as date
+import hashlib
 import json
 
 
@@ -16,11 +18,11 @@ class Block(object):
         self.user = user
         self.monster_data = monster_data
         self.proof = proof
-        self.hash = self.block_hash()
+        self.hash = self._block_hash()
 
-        self.update_chain()
+        self._update_chain()
 
-    def block_hash(self):
+    def _block_hash(self):
         """Hash all of the attributes for the current block."""
         sha = hashlib.sha256()
         index = str(self.index).encode('utf8')
@@ -51,7 +53,7 @@ class Block(object):
             separators=(',', ':'))
         return block
 
-    def update_chain(self):
+    def _update_chain(self):
         """."""
         block = {
             'index': self.index,
@@ -62,11 +64,18 @@ class Block(object):
             'proof': self.proof,
             'hash': self.hash
         }
-        with open('cryptomonsters/static/blockchain/blockchain.json') as file:
-            chain = json.load(file)
-        chain.append(block)
-        with open('cryptomonsters/static/blockchain/blockchain.json', 'w') as file:
-            json.dump(chain, file)
+        if settings.DEBUG:
+            with open('cryptomonsters/static/blockchain/blockchain.json') as file:
+                chain = json.load(file)
+            chain.append(block)
+            with open('cryptomonsters/static/blockchain/blockchain.json', 'w') as file:
+                json.dump(chain, file)
+        else:
+            with open(settings.STATIC_URL + 'blockchain/blockchain.json') as file:
+                chain = json.load(file)
+            chain.append(block)
+            with open(settings.STATIC_URL + 'blockchain/blockchain.json', 'w') as file:
+                json.dump(chain, file)
 
 
 class BlockChain(object):
@@ -159,17 +168,34 @@ class BlockChain(object):
 def create_monster(user):
     """."""
     types = {
+        'Zombie': 'img/c_mon1.png',
         'Slime': 'img/c_mon2.png',
         'Skeleton': 'img/c_mon3.png',
-        'Zombie': 'img/c_mon1.png',
-        'Minotaur': 'img/c_mon2.png'
+        'Wolf': 'img/c_mon4.png',
+        'Red Wizard': 'img/c_mon5.png',
+        'Blue Wizard': 'img/c_mon6.png',
+        'Bear': 'img/c_mon7.png',
+        'Barbarian': 'img/c_mon8.png',
+        'Minotaur': 'img/c_mon9.png',
+        'Goblin': 'img/c_mon10.png',
     }
     monster = Monster()
+    backstory = {
+        'Zombie': story.zombie_story(monster.name),
+        'Slime': story.slime_story(monster.name),
+        'Skeleton': story.skeleton_story(monster.name),
+        'Wolf': story.wolf_story(),
+        'Red Wizard': story.wizard_story(monster.name),
+        'Blue Wizard': story.wizard_story(monster.name),
+        'Bear': story.bear_story(monster.name),
+        'Barbarian': story.barbarian_story(monster.name),
+        'Minotaur': story.minotaur_story(monster.name),
+        'Goblin': story.goblin_story(monster.name),
+    }
     monster.user = user
     monster.img_file = types[monster.monster_type]
+    monster.monster_story = backstory[monster.monster_type]
     monster.save()
     monster.unique_id = monster.pk
     monster.save()
     return monster
-
-
