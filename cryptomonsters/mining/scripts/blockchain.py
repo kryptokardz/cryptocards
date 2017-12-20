@@ -1,7 +1,8 @@
 """."""
+from django.conf import settings
 from monsters.models import Monster
-import hashlib
 import datetime as date
+import hashlib
 import json
 
 
@@ -62,11 +63,18 @@ class Block(object):
             'proof': self.proof,
             'hash': self.hash
         }
-        with open('cryptomonsters/static/blockchain/blockchain.json') as file:
-            chain = json.load(file)
-        chain.append(block)
-        with open('cryptomonsters/static/blockchain/blockchain.json', 'w') as file:
-            json.dump(chain, file)
+        if settings.DEBUG:
+            with open('cryptomonsters/static/blockchain/blockchain.json') as file:
+                chain = json.load(file)
+            chain.append(block)
+            with open('cryptomonsters/static/blockchain/blockchain.json', 'w') as file:
+                json.dump(chain, file)
+        else:
+            with open(settings.STATIC_URL + 'blockchain.json') as file:
+                chain = json.load(file)
+            chain.append(block)
+            with open(settings.STATIC_URL + 'blockchain.json', 'w') as file:
+                json.dump(chain, file)
 
 
 class BlockChain(object):
