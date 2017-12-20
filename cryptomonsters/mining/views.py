@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 
 from mining.scripts.blockchain import BlockChain
-
+from django.views.generic import ListView, DetailView
 from monsters.models import Monster
 
 
@@ -33,8 +33,6 @@ class MiningNewBlock(LoginRequiredMixin, ListView):
         """."""
         context = super(MiningNewBlock, self).get_context_data(**kwargs)
         user = context['view'].request.user
-        # monster = json.loads(blockchain.blockchain.new_block(user))
         monster = blockchain.new_block(user)
         context['data'] = monster
-        # import pdb; pdb.set_trace()
         return context
