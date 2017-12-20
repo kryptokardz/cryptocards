@@ -23,6 +23,11 @@
         dest: /home/ubuntu/cryptocards
         version: blockchain
 
+    - name: change permissions of blockchain json to rw for all
+      file:
+        path: /home/ubuntu/cryptocards/cryptomonsters/cryptomonsters/static/blockchain/blockchain.json
+        mode: 0666
+
     - name: create python3 virtual enviroment
       command: python3 -m venv /home/ubuntu/cryptocards
 
