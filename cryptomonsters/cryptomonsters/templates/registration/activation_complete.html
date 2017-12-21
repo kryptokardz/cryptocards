@@ -3,7 +3,15 @@
 {% block title %}Hooray!{% endblock %}
 
 {% block content %}
-  <h2>Congratulations!!</h2>
+  <h2 style='text-align: center;'>Congratulations!!</h2>
 
-  <h3>Thank you! You are activated! This means you are an active user of this site. Have fun mining monsters!.</h3>
+  <h3 style='text-align: center;'>Thank you! You are activated! This means you are an active user of this site. Have fun mining monsters!.</h3>
+  <p style='text-align: center;'>Redirecting to homepage...</p>
+  <script>
+    function redirect(){
+       window.location.href = "{% url 'home' %}";
+    }
+
+    setTimeout(redirect, 3000);
+</script>
 {% endblock %}

@@ -11,7 +11,6 @@
             <div class="container">
               <div class="row">
                 <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6">
-                    {# <a href="index.html"><img class="img-responsive" src={% static 'img/logo.png' %} ></a> #}
                 </div>
                 <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right">
                     <div id="mySidenav" class="sidenav text-center">
@@ -21,6 +20,7 @@
                         <a href="{% url 'profile' %}">Profile</a><hr>
                         <a href="{% url 'all_monsters' %}">Monsters</a><hr>
                         <a href="{% url 'blockchain' %}">Blockchain</a><hr>
+                        <a href="{% url 'mining_home' %}">Mining</a><hr>
                         <a href="{% url 'logout' %}">Logout</a><hr>
                         {% else %}
                         <a href="{% url 'login' %}">Login</a><hr>
@@ -49,7 +49,12 @@
                  <p>A simple <strong>block-chain</strong> currency.</p>
                </div>
                 <div class="wow-btn text-center">
+                  {% if user.is_authenticated %}
                     <a class="btn btn-default wow-button" href="{% url 'mining_home' %}">Start Mining</a>
+                  {% else %}
+                    <a class="btn btn-default wow-button" href="{% url 'login' %}">Login</a>
+                    <a class="btn btn-default wow-button" href="{% url 'registration_register' %}">Register</a>
+                  {% endif %}
                 </div>
             
             </div>
@@ -67,13 +72,12 @@
 
             <div class="row">
                <div class="text-center">
-                 <h2>Features</h2>
+                 <h2>About</h2>
                </div>
                <hr class="hr-mid">
                <div class="sub-text text-center">
                      <p class="font-1">
-                        Sed varius suspendisse dictum leo ipsum amet pellentesque
-                        fusce ac hendrerit consectetur tempor lorem ipsum
+                        Super happy monster mining fun times!
                      </p>
                </div>
            </div>
@@ -82,24 +86,20 @@
 
                 <div class="col-xs-12 col-lg-6 col-sm-6 col-md-6 col-block">
                       <div class="block text-center block-first">
-                                 <div class="icon">
-                                    <i class="fa fa-diamond fa-2x"></i>
-                                 </div>  
-                                   <h4>Supreme comfort</h4>
-                                   <p class="font-2">Lorem ipsum dolor sit amet, consectetur
-                                   adipisicing elit, sed do eiusmod tempor
-                                   incididunt ut labore et.</p>
+                             <div>
+                                  <img src="{% static 'img/c_mon2.png' %}" style='width: 20%;'>
+                             </div>  
+                                   <h4>Mine for Monsters!</h4>
+                                   <p class="font-2">Use your computer power to mine for monsters. Get LUCKY~! UNIQUE MONSTER BE YOURS!~</p>
                         </div>   
                 </div>
                 <div class="col-xs-12 col-lg-6 col-sm-6 col-md-6 col-block">
                       <div class="block text-center block-second">
-                             <div class="icon">
-                                  <i class="fa fa-camera fa-2x"></i>
+                             <div>
+                                  <img src="{% static 'img/c_mon5.png' %}" style='width: 20%;'>
                              </div>  
-                              <h4>Immersive experince</h4>
-                              <p class="font-2">Lorem ipsum dolor sit amet, consectetur
-                                  adipisicing elit, sed do eiusmod tempor
-                                  incididunt ut labore et.</p>                                       
+                              <h4>Blockchain Technology!</h4>
+                              <p class="font-2">We'll keep your freshly mined monsters safe for you on our self-built, super secure, state of the art BLOCKCHAIN</p>
                       </div>
                 </div>
             </div>
@@ -107,24 +107,20 @@
             <div class="row">
                 <div class="col-xs-12 col-lg-6 col-sm-6 col-md-6 col-block">
                     <div class="block text-center block-third">
-                                 <div class="icon">
-                                     <i class="fa fa-eye fa-2x"></i>
-                                 </div>  
-                                   <h4>complete focus</h4>
-                                   <p class="font-2">Lorem ipsum dolor sit amet, consectetur
-                                   adipisicing elit, sed do eiusmod tempor
-                                   incididunt ut labore et.</p>
+                             <div>
+                                  <img src="{% static 'img/c_mon8.png' %}" style='width: 20%;'>
+                             </div>   
+                                   <h4>Unique attributes!</h4>
+                                   <p class="font-2">Each monster is randomly assigned unique attributes! Keep mining until you get that PERFECT 10!</p>
                     </div>   
                 </div>
                 <div class="col-xs-12 col-lg-6 col-sm-6 col-md-6 col-block">
                     <div class="block text-center block-last">
-                            <div class="icon">
-                                 <i class="fa fa-sliders fa-2x"></i>
-                            </div>  
-                            <h4>Convenient control</h4>
-                            <p class="font-2">Lorem ipsum dolor sit amet, consectetur
-                                  adipisicing elit, sed do eiusmod tempor
-                                  incididunt ut labore et.</p>                                        
+                             <div>
+                                  <img src="{% static 'img/c_mon9.png' %}" style='width: 20%;'>
+                             </div>   
+                            <h4>Grow you monster horde!</h4>
+                            <p class="font-2">GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW!</p>                                        
                       </div>
                     </div>
                 </div>
