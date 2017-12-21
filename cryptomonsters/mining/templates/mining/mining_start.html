@@ -1,0 +1,34 @@
+{% extends 'cryptomonsters/base.html' %}
+
+{% load static %}
+
+{% block nav %}
+{% if ready is True %}
+{% include 'cryptomonsters/navbar.html'%}
+{% else %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+{% if ready is True %}
+<div class="wow-btn text-center">
+    <img src="{% static  data.img_file.url  %}" width="250" height="250" />
+    <p>Name: {{ data.name }} the {{ data.monster_type }}</p>
+    <p>Health: {{ data.health }}</p>
+    <p>Defense: {{ data.defense }}</p>
+    <p>Attack: {{ data.attack }}</p>
+    <p>id: {{ data.unique_id }}</p>
+</div>
+{% else %}
+ <div class="wow-btn text-center">
+    <p>Please wait till you mine a dope monster.
+        In the meantime feel free to check out other user's monsters.
+        Check back in to see if your monster has been mined.</p>
+</div>
+<div class="wow-btn text-center">
+    <a class="btn btn-default wow-button" href="{% url 'mining_new_block' %}?id={{async_id}}">Check monster status.</a>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -50,30 +50,30 @@ from django.urls import reverse_lazy
 #     #     blockchain.new_block('bob')
 #     #     self.assertEqual(blockchain.chain[1].User, 'bob')
 
-class BlockChainViewTest(TestCase):
-    """Test the blockchain view."""
+# class BlockChainViewTest(TestCase):
+#     """Test the blockchain view."""
 
-    def test_blockchain_view_template(self):
-        """Test that the blockchain view uses proper html."""
-        response = self.client.get(reverse_lazy('blockchain'))
-        self.assertTemplateUsed(response, 'mining/blockchain.html')
+#     def test_blockchain_view_template(self):
+#         """Test that the blockchain view uses proper html."""
+#         response = self.client.get(reverse_lazy('blockchain'))
+#         self.assertTemplateUsed(response, 'mining/blockchain.html')
 
-    def test_blockchain_returns_200_ok(self):
-        """Test that blockchain returns 200 ok."""
-        response = self.client.get(reverse_lazy('blockchain'))
-        self.assertEqual(response.status_code, 200)
+#     def test_blockchain_returns_200_ok(self):
+#         """Test that blockchain returns 200 ok."""
+#         response = self.client.get(reverse_lazy('blockchain'))
+#         self.assertEqual(response.status_code, 200)
 
-    def test_blockchain_view_shows_genesis_block(self):
-        """Test that the blockchain view shows genesis block."""
-        response = self.client.get(reverse_lazy('blockchain'))
-        self.assertIn(b'Genesis', response.content)
+#     def test_blockchain_view_shows_genesis_block(self):
+#         """Test that the blockchain view shows genesis block."""
+#         response = self.client.get(reverse_lazy('blockchain'))
+#         self.assertIn(b'Genesis', response.content)
 
-    def test_blockchain_view_renders_hash(self):
-        """Test that the blockchain view renders hash."""
-        response = self.client.get(reverse_lazy('blockchain'))
-        self.assertIn(b'Hash:', response.content)
+#     def test_blockchain_view_renders_hash(self):
+#         """Test that the blockchain view renders hash."""
+#         response = self.client.get(reverse_lazy('blockchain'))
+#         self.assertIn(b'Hash:', response.content)
 
-    def test_blockchain_view_includes_monsters(self):
-        """Test blockchain view includes monsters."""
-        response = self.client.get(reverse_lazy('blockchain'))
-        self.assertIn(b'Monster Name', response.content)
+#     def test_blockchain_view_includes_monsters(self):
+#         """Test blockchain view includes monsters."""
+#         response = self.client.get(reverse_lazy('blockchain'))
+#         self.assertIn(b'Monster Name', response.content)

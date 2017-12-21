@@ -167,3 +167,6 @@ else:
     STATICFILES_LOCATION = 'static'
     STATICFILES_STORAGE = 'cryptomonsters.custom_storages.StaticStorage'
     STATIC_URL = 'https://{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+
+
+
