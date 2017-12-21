@@ -2,9 +2,11 @@
 from django.conf import settings
 from monsters.models import Monster
 import monsters.scripts.stories as story
+from django.core import serializers
 import datetime as date
 import hashlib
 import json
+from ..tasks import p_o_w
 
 
 class Block(object):
@@ -101,11 +103,35 @@ class BlockChain(object):
 
     def new_block(self, user):
         """Add a new block to the chain."""
-        # get previous block
         previous_block = self._get_previous_block()
-        # run proof of work function
-        proof = self._proof_of_work(previous_block)
+        ser_user = serializers.serialize('json', [user])
+        proof_of_work = p_o_w.delay(previous_block, ser_user)
+        async_id = (proof_of_work.as_tuple()[0][0])
+        return async_id
+
+    def _proof_of_work(self, prev_block, ser_user):
+        """Run proof of work algorithm to mine to block."""
+        previous_block = prev_block
+        previous_block_index = previous_block['index']
+        lead_zeros = 4
+        nonce = 1
+        proof_hash = self._calc_pow_hash(
+            previous_block['index'], previous_block['timestamp'],
+            previous_block['previous_hash'], previous_block['user'],
+            previous_block['monster_data'], nonce)
+        while str(proof_hash[0:lead_zeros]) != '0' * lead_zeros:
+            check_previous_block = self._get_previous_block()
+            if check_previous_block['index'] != previous_block_index:
+                nonce = 0
+                previous_block = check_previous_block
+            nonce += 1
+            proof_hash = self._calc_pow_hash(
+                previous_block['index'], previous_block['timestamp'],
+                previous_block['previous_hash'], previous_block['user'],
+                previous_block['monster_data'], nonce)
         index = previous_block['index'] + 1
+        des_user = serializers.deserialize('json', ser_user)
+        user = next(des_user).object
         monster = create_monster(user)
         timestamp = date.datetime.now().strftime("%c")
         previous_hash = previous_block['hash']
@@ -119,33 +145,9 @@ class BlockChain(object):
             'unique_id': monster.pk,
             'user': monster.user.username
         }
-        new_block = Block(index, timestamp, previous_hash, user, monster_data, proof)
+        new_block = Block(index, timestamp, previous_hash, user, monster_data, proof_hash)
         self.chain.append(new_block)
-        return monster
-
-    def _proof_of_work(self, prev_block):
-        """Run proof of work algorithm to mine to block."""
-        previous_block = prev_block
-        previous_block_index = previous_block['index']
-        lead_zeros = 2
-        nonce = 1
-        proof_hash = self._calc_pow_hash(
-            previous_block['index'], previous_block['timestamp'],
-            previous_block['previous_hash'], previous_block['user'],
-            previous_block['monster_data'], nonce)
-        while str(proof_hash[0:lead_zeros]) != '0' * lead_zeros:
-            check_previous_block = self._get_previous_block()
-            # if another user mines a block first and the block chain
-            # changes then start over
-            if check_previous_block['index'] != previous_block_index:
-                nonce = 0
-                previous_block = check_previous_block
-            nonce += 1
-            proof_hash = self._calc_pow_hash(
-                previous_block['index'], previous_block['timestamp'],
-                previous_block['previous_hash'], previous_block['user'],
-                previous_block['monster_data'], nonce)
-        return proof_hash
+        return
 
     def _calc_pow_hash(self, index, timestamp, previous_hash, user, monster_data, nonce):
         """Calc new hash until the POW requirements are met."""
