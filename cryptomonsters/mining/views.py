@@ -61,6 +61,7 @@ class MiningNewBlock(LoginRequiredMixin, ListView):
             return context
         except AttributeError:
             context['async_id'] = async_id
+            context['wait'] = True
             return context
 
 

@@ -26,7 +26,14 @@
 </div>
 
 {% else %}
+<div class="wow-btn text-center">
+    <img src="{% static 'img/mining_goblins.gif' %}">
+</div>
  <div class="wow-btn text-center">
+
+    {% if wait is True %}
+    <h4>Your monster is not ready yet!</h4>
+    {% endif %}
     <p>Please wait till you mine a dope monster.
         In the meantime feel free to check out other user's monsters.
         Check back in to see if your monster has been mined.</p>
