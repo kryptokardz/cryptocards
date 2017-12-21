@@ -9,6 +9,8 @@
             <h2 class="text-center">Living Monsters</h2>
             <hr class="hr-mid">
 
+{# template for each monster #}
+
         {% for monster in monsters %}
             <div class="monster">
                <div class="monster_info">
@@ -30,7 +32,20 @@
             </div>
           </div>
         {% endfor %}
+
+      
           </div>
         </section>
+        <br>
+      <hr class="hr-mid">
+      <div class="pagination" style="text-align: center;">
+        {% for page_num in paginator.page_range %}
+          {% if page_num == page_obj.number %}
+            <a href="?page={{ page_num }}" style="color: gray">{{ page_num }}</a>
+          {% else %}
+            <a href="?page={{ page_num }}" style="color: darkgray">{{ page_num }}</a>
+          {% endif %}
+        {% endfor %}
+      </div>
 
 {% endblock %}
