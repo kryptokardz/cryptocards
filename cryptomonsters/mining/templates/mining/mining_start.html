@@ -20,6 +20,11 @@
     <p>Attack: {{ data.attack }}</p>
     <p>id: {{ data.unique_id }}</p>
 </div>
+<div class="wow-btn text-center">
+    <a class="btn btn-default wow-button" href="{% url 'profile' %}">Check profile</a>
+    <a class="btn btn-default wow-button" href="{% url 'mining_start' %}">MINE MORE~!</a>
+</div>
+
 {% else %}
  <div class="wow-btn text-center">
     <p>Please wait till you mine a dope monster.
