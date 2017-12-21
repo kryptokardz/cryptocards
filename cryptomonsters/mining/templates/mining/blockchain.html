@@ -26,4 +26,15 @@
   {% endfor %}
 </div>
 
+<hr class="hr-mid">
+<div class="pagination" style="text-align: center;">
+  {% for page_num in blockchain.paginator.page_range %}
+    {% if blockchain.number == page_num %}
+      <a href="?page={{ page_num }}" style="color: gray">{{ page_num }}</a>
+    {% else %}
+      <a href="?page={{ page_num }}" style="color: darkgray">{{ page_num }}</a>
+    {% endif %}
+  {% endfor %}
+</div>
+
 {% endblock %}

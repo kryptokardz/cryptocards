@@ -86,12 +86,15 @@ WSGI_APPLICATION = 'cryptomonsters.wsgi.application'
 LOGIN_REDIRECT_URL = 'home'
 ACCOUNT_ACTIVATION_DAYS = 7
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'cryptomonsterz@gmail.com'
-EMAIL_HOST_PASSWORD = 'hbbnnkjpxzpxewbi'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = 'cryptomonsterz@gmail.com'
+    EMAIL_HOST_PASSWORD = 'hbbnnkjpxzpxewbi'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
 
 
 # Database
@@ -151,6 +154,9 @@ USE_TZ = True
 
 # Amazon Web Services Configuration
 if DEBUG:
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
+else:
     AWS_STORAGE_BUCKET_NAME = 'cryptomonsters'
     AWS_ACCESS_KEY_ID = os.environ.get('IAM_USER_ACCESS_KEY_ID', '')
     AWS_SECRET_ACCESS_KEY = os.environ.get('IAM_USER_SECRET_ACCESS_KEY', '')
@@ -161,8 +167,3 @@ if DEBUG:
     STATICFILES_LOCATION = 'static'
     STATICFILES_STORAGE = 'cryptomonsters.custom_storages.StaticStorage'
     STATIC_URL = 'https://{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
-
-
-else:
-    STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, "static")
