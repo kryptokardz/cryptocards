@@ -23,6 +23,7 @@
                         {% endif %}
                 </div>
                   <h4>{{ monster.name  }} the {{ monster.monster_type }}</h4>
+                  <p><strong>Owner:</strong> {{ monster.user.username }}</p>
                   <p><strong>Monster Type:</strong> {{ monster.monster_type }}</p>
                   <p><strong>Health:</strong> {{ monster.health }}</p>
                   <p><strong>Defense:</strong> {{ monster.defense }}</p>
