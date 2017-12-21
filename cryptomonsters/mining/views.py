@@ -1,11 +1,15 @@
 """Base views for cryptomonsters."""
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
-
 from mining.scripts.blockchain import BlockChain
-
 from monsters.models import Monster
+from celery import Celery
 
+app = Celery('tasks',
+             broker='redis://localhost',
+             # backend='db+postgresql://localhost:5432/async_tasks'
+             backend='redis://localhost'
+             )
 
 blockchain = BlockChain()
 
@@ -16,6 +20,21 @@ class MiningHomeView(LoginRequiredMixin, ListView):
     model = Monster
     template_name = 'mining/mining.html'
     redirect_field_name = '/accounts/login'
+
+
+class MiningStart(LoginRequiredMixin, ListView):
+    """."""
+
+    model = Monster
+    template_name = 'mining/mining_start.html'
+    redirect_field_name = '/accounts/login'
+
+    def get_context_data(self, **kwargs):
+        """."""
+        context = super(MiningStart, self).get_context_data(**kwargs)
+        user = context['view'].request.user
+        blockchain.new_block(user)
+        return
 
 
 class MiningNewBlock(LoginRequiredMixin, ListView):

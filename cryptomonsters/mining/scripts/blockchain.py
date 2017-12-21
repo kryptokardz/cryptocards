@@ -5,6 +5,17 @@ import monsters.scripts.stories as story
 import datetime as date
 import hashlib
 import json
+import redis
+from .tasks import rev
+from celery import Celery
+
+# app = Celery('tasks',
+#              broker='redis://localhost',
+#              # backend='db+postgresql://localhost:5432/async_tasks'
+#              backend='redis://localhost'
+#              )
+
+# conn = redis.Redis('localhost')
 
 
 class Block(object):
@@ -110,6 +121,7 @@ class BlockChain(object):
         timestamp = date.datetime.now().strftime("%c")
         previous_hash = previous_block['hash']
         user = user.username
+        celery_task = rev.delay(monster.name)
         monster_data = {
             'name': '{} the {}'.format(monster.name, monster.monster_type),
             'health': monster.health,
