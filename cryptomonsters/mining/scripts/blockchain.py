@@ -192,6 +192,7 @@ def create_monster(user):
         'Barbarian': story.barbarian_story(monster.name),
         'Minotaur': story.minotaur_story(monster.name),
         'Goblin': story.goblin_story(monster.name),
+        'Ogre': story.goblin_story(monster.name),
     }
     monster.user = user
     monster.img_file = types[monster.monster_type]
