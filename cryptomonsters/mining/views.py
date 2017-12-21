@@ -3,15 +3,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from mining.scripts.blockchain import BlockChain
 from monsters.models import Monster
-from celery import Celery
-
-app = Celery('tasks',
-             broker='redis://localhost',
-             # backend='db+postgresql://localhost:5432/async_tasks'
-             backend='redis://localhost'
-             )
+from django.urls import reverse_lazy
+import redis
+import json
 
 blockchain = BlockChain()
+conn = redis.Redis('localhost')
 
 
 class MiningHomeView(LoginRequiredMixin, ListView):
@@ -33,22 +30,44 @@ class MiningStart(LoginRequiredMixin, ListView):
         """."""
         context = super(MiningStart, self).get_context_data(**kwargs)
         user = context['view'].request.user
-        blockchain.new_block(user)
-        return
+        async_id = blockchain.new_block(user)
+        context['async_id'] = async_id
+        context['ready'] = False
+        return context
 
 
 class MiningNewBlock(LoginRequiredMixin, ListView):
     """."""
 
     model = Monster
-    template_name = 'mining/new_block.html'
-    context_object_name = 'data'
+    template_name = 'mining/mining_start.html'
     redirect_field_name = '/accounts/login'
 
     def get_context_data(self, **kwargs):
         """."""
         context = super(MiningNewBlock, self).get_context_data(**kwargs)
-        user = context['view'].request.user
-        monster = blockchain.new_block(user)
-        context['data'] = monster
-        return context
+        async_id = self.request.GET['id']
+        try:
+            json.loads(conn.get("celery-task-meta-{}".format(async_id)).decode('utf8'))
+            context['ready'] = True
+            user = context['view'].request.user
+            monster = user.monsters.last()
+            context['data'] = monster
+            return context
+        except AttributeError:
+            context['async_id'] = async_id
+            return context
+
+
+    # except AttributeError:
+    #     model = Monster
+    #     template_name = 'mining/mining_start.html'
+    #     redirect_field_name = '/accounts/login'
+
+    # def get_context_data(self, **kwargs):
+    #     """."""
+    #     context = super(MiningNewBlock, self).get_context_data(**kwargs)
+    #     user = context['view'].request.user
+    #     monster = blockchain.new_block(user)
+    #     context['data'] = monster
+    #     return context

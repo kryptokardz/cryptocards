@@ -2,20 +2,11 @@
 from django.conf import settings
 from monsters.models import Monster
 import monsters.scripts.stories as story
+from django.core import serializers
 import datetime as date
 import hashlib
 import json
-import redis
-from .tasks import rev
-from celery import Celery
-
-# app = Celery('tasks',
-#              broker='redis://localhost',
-#              # backend='db+postgresql://localhost:5432/async_tasks'
-#              backend='redis://localhost'
-#              )
-
-# conn = redis.Redis('localhost')
+from ..tasks import p_o_w
 
 
 class Block(object):
@@ -115,31 +106,34 @@ class BlockChain(object):
         # get previous block
         previous_block = self._get_previous_block()
         # run proof of work function
-        proof = self._proof_of_work(previous_block)
-        index = previous_block['index'] + 1
-        monster = create_monster(user)
-        timestamp = date.datetime.now().strftime("%c")
-        previous_hash = previous_block['hash']
-        user = user.username
-        celery_task = rev.delay(monster.name)
-        monster_data = {
-            'name': '{} the {}'.format(monster.name, monster.monster_type),
-            'health': monster.health,
-            'defense': monster.defense,
-            'attack': monster.attack,
-            'monster_type': monster.monster_type,
-            'unique_id': monster.pk,
-            'user': monster.user.username
-        }
-        new_block = Block(index, timestamp, previous_hash, user, monster_data, proof)
-        self.chain.append(new_block)
-        return monster
+        # proof = self._proof_of_work(previous_block)
+        ser_user = serializers.serialize('json', [user])
+        proof_of_work = p_o_w.delay(previous_block, ser_user)
+        async_id = (proof_of_work.as_tuple()[0][0])
+        # index = previous_block['index'] + 1
+        # monster = create_monster(user)
+        # timestamp = date.datetime.now().strftime("%c")
+        # previous_hash = previous_block['hash']
+        # user = user.username
+        # monster_data = {
+        #     'name': '{} the {}'.format(monster.name, monster.monster_type),
+        #     'health': monster.health,
+        #     'defense': monster.defense,
+        #     'attack': monster.attack,
+        #     'monster_type': monster.monster_type,
+        #     'unique_id': monster.pk,
+        #     'user': monster.user.username
+        # }
+        # new_block = Block(index, timestamp, previous_hash, user, monster_data, proof)
+        # self.chain.append(new_block)
+        print('async_id', async_id)
+        return async_id
 
-    def _proof_of_work(self, prev_block):
+    def _proof_of_work(self, prev_block, ser_user):
         """Run proof of work algorithm to mine to block."""
         previous_block = prev_block
         previous_block_index = previous_block['index']
-        lead_zeros = 2
+        lead_zeros = 1
         nonce = 1
         proof_hash = self._calc_pow_hash(
             previous_block['index'], previous_block['timestamp'],
@@ -157,7 +151,26 @@ class BlockChain(object):
                 previous_block['index'], previous_block['timestamp'],
                 previous_block['previous_hash'], previous_block['user'],
                 previous_block['monster_data'], nonce)
-        return proof_hash
+
+        index = previous_block['index'] + 1
+        des_user = serializers.deserialize('json', ser_user)
+        user = next(des_user).object
+        monster = create_monster(user)
+        timestamp = date.datetime.now().strftime("%c")
+        previous_hash = previous_block['hash']
+        user = user.username
+        monster_data = {
+            'name': '{} the {}'.format(monster.name, monster.monster_type),
+            'health': monster.health,
+            'defense': monster.defense,
+            'attack': monster.attack,
+            'monster_type': monster.monster_type,
+            'unique_id': monster.pk,
+            'user': monster.user.username
+        }
+        new_block = Block(index, timestamp, previous_hash, user, monster_data, proof_hash)
+        self.chain.append(new_block)
+        return
 
     def _calc_pow_hash(self, index, timestamp, previous_hash, user, monster_data, nonce):
         """Calc new hash until the POW requirements are met."""
