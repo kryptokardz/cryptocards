@@ -3,8 +3,7 @@ input,select,textarea{
     font-family: 'Lora', serif;
 }
 
-
-.btn-primary{
+btn-primary{
     margin-top: -3%;
     width: 20%;
 }
