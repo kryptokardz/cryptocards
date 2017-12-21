@@ -1,4 +1,5 @@
 """Base views for cryptomonsters."""
+from monsters.models import Monster
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -13,7 +14,6 @@ def home_view(request):
 
 class ProfileView(LoginRequiredMixin, DetailView):
     """Display user data."""
-
     redirect_field_name = '/accounts/login'
     template_name = 'cryptomonsters/profile.html'
     context_object_name = 'user'
