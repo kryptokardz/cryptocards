@@ -54,3 +54,11 @@ form{
 
     }
 }
+
+.pagination{
+    font-family: 'Lora', serif;
+    font-size: 1.2em;
+    color: #717171;
+    text-align: center;
+    width: 100%;
+}
