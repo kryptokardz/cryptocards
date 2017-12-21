@@ -4,127 +4,120 @@
 
 {% block nav %}
 
-    <div class="overlay" id="overlay" onclick="closeNav()"></div>
-    
-    <section class="head index-part-1">
-        <div class="head-bar">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6">
-                </div>
-                <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right">
-                    <div id="mySidenav" class="sidenav text-center">
-                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br>
-                        <a href="{% url 'home' %}">Home</a><hr>
-                        {% if user.is_authenticated %}
-                        <a href="{% url 'profile' %}">Profile</a><hr>
-                        <a href="{% url 'all_monsters' %}">Monsters</a><hr>
-                        <a href="{% url 'blockchain' %}">Blockchain</a><hr>
-                        <a href="{% url 'mining_home' %}">Mining</a><hr>
-                        <a href="{% url 'logout' %}">Logout</a><hr>
-                        {% else %}
-                        <a href="{% url 'login' %}">Login</a><hr>
-                        <a href="{% url 'registration_register' %}">Register</a><hr>
-                        {% endif %}
-                    </div>
-                    <div class="main" id="main">
-                      <a onclick="openNav()">MENU &#9776;</a>
-                    </div>
-                </div>
-              </div>
-              <hr>
+<div class="overlay" id="overlay" onclick="closeNav()"></div>
+  <section class="head index-part-1">
+    <div class="head-bar">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6">
+          </div>
+          <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right">
+            <div id="mySidenav" class="sidenav text-center">
+              <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br>
+              <a href="{% url 'home' %}">Home</a><hr>
+              {% if user.is_authenticated %}
+                <a href="{% url 'profile' %}">Profile</a><hr>
+                <a href="{% url 'all_monsters' %}">Monsters</a><hr>
+                <a href="{% url 'blockchain' %}">Blockchain</a><hr>
+                <a href="{% url 'mining_home' %}">Mining</a><hr>
+                <a href="{% url 'logout' %}">Logout</a><hr>
+              {% else %}
+                <a href="{% url 'login' %}">Login</a><hr>
+                <a href="{% url 'registration_register' %}">Register</a><hr>
+              {% endif %}
             </div>
-        </div>
-
-        <div class="wow">
-          <div class="container">
-            <div class="row">
-               <div class="wow-logo">
-                  <img class="img-responsive img-logo" src={% static 'img/cryptomonster_home.png' %}>
-               </div> 
-               <div class="text-center">
-                 <h1>Cryptomonsters</h1>
-               </div>
-               <div class="font-1 helmet text-center">
-                 <p>A simple <strong>block-chain</strong> currency.</p>
-               </div>
-                <div class="wow-btn text-center">
-                  {% if user.is_authenticated %}
-                    <a class="btn btn-default wow-button" href="{% url 'mining_home' %}">Start Mining</a>
-                  {% else %}
-                    <a class="btn btn-default wow-button" href="{% url 'login' %}">Login</a>
-                    <a class="btn btn-default wow-button" href="{% url 'registration_register' %}">Register</a>
-                  {% endif %}
-                </div>
-            
+            <div class="main" id="main">
+              <a onclick="openNav()">MENU &#9776;</a>
             </div>
           </div>
         </div>
-    </section>
+        <hr>
+      </div>
+    </div>
+
+    <div class="wow">
+      <div class="container">
+        <div class="row">
+          <div class="wow-logo">
+            <img class="img-responsive img-logo" src={% static 'img/cryptomonster_home.png' %}>
+          </div> 
+          <div class="text-center">
+            <h1>Cryptomonsters</h1>
+          </div>
+          <div class="font-1 helmet text-center">
+            <p>A simple ledger of monsters created by using <strong>block-chain</strong> technology.</p>
+          </div>
+          <div class="wow-btn text-center">
+            {% if user.is_authenticated %}
+              <a class="btn btn-default wow-button" href="{% url 'mining_home' %}">Start Mining</a>
+            {% else %}
+              <a class="btn btn-default wow-button" href="{% url 'login' %}">Login</a>
+              <a class="btn btn-default wow-button" href="{% url 'registration_register' %}">Register</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 {% endblock %}
 
 
 {% block content %}
 
-    <section class="index-part-2">
-         <div class="container">
+<section class="index-part-2">
+  <div class="container">
+    <div class="row">
+      <div class="text-center">
+        <h2>About</h2>
+      </div>
+      <hr class="hr-mid">
+      <div class="sub-text text-center">
+        <p class="font-1">Super happy monster mining fun times!</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-lg-6 col-sm-6 col-md-6 col-block">
+        <div class="block text-center block-first">
+          <div>
+            <img src="{% static 'img/c_mon2.png' %}" class='monster_icon'>
+          </div>  
+          <h4>Mine for Monsters!</h4>
+          <p class="font-2">Use your computer power to mine for monsters. Get LUCKY~! UNIQUE MONSTER BE YOURS!~</p>
+        </div>   
+      </div>
+      <div class="col-xs-12 col-lg-6 col-sm-6 col-md-6 col-block">
+        <div class="block text-center block-second">
+          <div>
+            <img src="{% static 'img/c_mon5.png' %}" class='monster_icon'>
+          </div>  
+          <h4>Blockchain Technology!</h4>
+          <p class="font-2">We'll keep your freshly mined monsters safe for you on our self-built, super secure, state of the art <strong>BLOCKCHAIN</strong></p>
+        </div>
+      </div>
+    </div>
 
-            <div class="row">
-               <div class="text-center">
-                 <h2>About</h2>
-               </div>
-               <hr class="hr-mid">
-               <div class="sub-text text-center">
-                     <p class="font-1">
-                        Super happy monster mining fun times!
-                     </p>
-               </div>
-           </div>
-
-            <div class="row">
-
-                <div class="col-xs-12 col-lg-6 col-sm-6 col-md-6 col-block">
-                      <div class="block text-center block-first">
-                             <div>
-                                  <img src="{% static 'img/c_mon2.png' %}" style='width: 20%;'>
-                             </div>  
-                                   <h4>Mine for Monsters!</h4>
-                                   <p class="font-2">Use your computer power to mine for monsters. Get LUCKY~! UNIQUE MONSTER BE YOURS!~</p>
-                        </div>   
-                </div>
-                <div class="col-xs-12 col-lg-6 col-sm-6 col-md-6 col-block">
-                      <div class="block text-center block-second">
-                             <div>
-                                  <img src="{% static 'img/c_mon5.png' %}" style='width: 20%;'>
-                             </div>  
-                              <h4>Blockchain Technology!</h4>
-                              <p class="font-2">We'll keep your freshly mined monsters safe for you on our self-built, super secure, state of the art BLOCKCHAIN</p>
-                      </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-xs-12 col-lg-6 col-sm-6 col-md-6 col-block">
-                    <div class="block text-center block-third">
-                             <div>
-                                  <img src="{% static 'img/c_mon8.png' %}" style='width: 20%;'>
-                             </div>   
-                                   <h4>Unique attributes!</h4>
-                                   <p class="font-2">Each monster is randomly assigned unique attributes! Keep mining until you get that PERFECT 10!</p>
-                    </div>   
-                </div>
-                <div class="col-xs-12 col-lg-6 col-sm-6 col-md-6 col-block">
-                    <div class="block text-center block-last">
-                             <div>
-                                  <img src="{% static 'img/c_mon9.png' %}" style='width: 20%;'>
-                             </div>   
-                            <h4>Grow you monster horde!</h4>
-                            <p class="font-2">GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW!</p>                                        
-                      </div>
-                    </div>
-                </div>
-            </div>
-    </section>
+    <div class="row">
+      <div class="col-xs-12 col-lg-6 col-sm-6 col-md-6 col-block">
+        <div class="block text-center block-third">
+          <div>
+            <img src="{% static 'img/c_mon8.png' %}" class='monster_icon'>
+          </div>   
+          <h4>Unique attributes!</h4>
+          <p class="font-2">Each monster is randomly assigned unique attributes! Keep mining until you get that PERFECT 10!</p>
+        </div>   
+      </div>
+      <div class="col-xs-12 col-lg-6 col-sm-6 col-md-6 col-block">
+        <div class="block text-center block-last">
+          <div>
+            <img src="{% static 'img/c_mon9.png' %}" class='monster_icon'>
+          </div>   
+          <h4>Grow you monster horde!</h4>
+          <p class="font-2">GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW! GROW!</p>                                        
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 {% endblock %}

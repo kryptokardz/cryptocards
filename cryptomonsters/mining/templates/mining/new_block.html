@@ -3,22 +3,19 @@
 {% load static %}
 
 {% block content %}
- <div class="wow-btn text-center">
-    <img src="{% static  data.img_file.url  %}" width="250" height="250" />
-    <p>Name: {{ data.name }} the {{ data.monster_type }}</p>
-    <p>Health: {{ data.health }}</p>
-    <p>Defense: {{ data.defense }}</p>
-    <p>Attack: {{ data.attack }}</p>
-    <p>id: {{ data.unique_id }}</p>
+
+<div class="wow-btn text-center">
+  <img src="{% static  data.img_file.url  %}" width="250" height="250" />
+  <p>Name: {{ data.name }} the {{ data.monster_type }}</p>
+  <p>Health: {{ data.health }}</p>
+  <p>Defense: {{ data.defense }}</p>
+  <p>Attack: {{ data.attack }}</p>
+  <p>id: {{ data.unique_id }}</p>
 </div>
 
-<div class="mining_btn">
-    <div class="min_btn">
-      <a class="btn btn-default call-btn-1" href="{% url 'profile' %}">go to your profile</a>
-    </div>
-    <div class="min_btn">
-      <a class="btn btn-default call-btn-1" href="{% url 'mining_new_block' %}">mine more monsters</a>
-    </div>
-  </div>
+<div class="wow-btn text-center">
+    <a class="btn btn-default wow-button" href="{% url 'profile' %}">Check profile</a>
+    <a class="btn btn-default wow-button" href="{% url 'mining_new_block' %}">MINE MORE~!</a>
+</div>
 
 {% endblock %}

@@ -3,8 +3,6 @@ from django.views.generic import ListView
 
 from monsters.models import Monster
 
-from django.core.paginator import EmptyPage, Paginator, PageNotAnInteger
-
 
 class MonstersView(ListView):
     """View all monsters."""
@@ -16,4 +14,4 @@ class MonstersView(ListView):
 
     def get_queryset(self):
         """Request users profile."""
-        return Monster.objects.all()
+        return Monster.objects.all().order_by('-unique_id')

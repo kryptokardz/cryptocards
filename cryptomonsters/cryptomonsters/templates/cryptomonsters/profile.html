@@ -8,8 +8,8 @@
   <div class="container">
     <h2 class="text-center">{{ user.username }}</h2>
     <hr class="hr-mid">
-    <div style='height: 33em; overflow: auto;'>
-      <section class="Element-heading" style='height: fit-content;'>
+    <div class='scrollable'>
+      <section class="Element-heading the_scrolled">
         <h3 class="text-center">Your Monsters</h3>
 
         {% for monster in user.monsters.all reversed %}
@@ -19,6 +19,9 @@
               <h4>{{ monster.name  }} the {{ monster.monster_type }}</h4>
               <hr class="hr-short">
               <p class="font-2">{{ monster.monster_story }}</p>
+              <p><strong>Health: </strong> {{ monster.health }}</p>
+              <p><strong>Attack: </strong> {{ monster.attack }}</p>
+              <p><strong>Defense: </strong> {{ monster.defense }}</p>
               <p><strong>Monster Type:</strong> {{ monster.monster_type }}</p>
               <p><strong>Unique Id:</strong> {{ monster.unique_id }}</p>
             </div>
