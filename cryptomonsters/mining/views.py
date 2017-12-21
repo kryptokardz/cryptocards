@@ -1,5 +1,9 @@
 """Base views for cryptomonsters."""
+import json
+
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render
 from django.views.generic import ListView
 
 from mining.scripts.blockchain import BlockChain
@@ -33,3 +37,14 @@ class MiningNewBlock(LoginRequiredMixin, ListView):
         monster = blockchain.new_block(user)
         context['data'] = monster
         return context
+
+
+def blockchain_view(request):
+    """Veiw the blockchain."""
+    if settings.DEBUG:
+        with open('cryptomonsters/static/blockchain/blockchain.json') as file:
+            chain = json.load(file)
+    else:
+        with open(settings.STATIC_URL + 'blockchain/blockchain.json') as file:
+            chain = json.load(file)
+    return render(request, 'mining/blockchain.html', {'blockchain': chain})
