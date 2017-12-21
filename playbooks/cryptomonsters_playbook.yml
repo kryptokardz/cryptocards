@@ -21,7 +21,7 @@
         clone: yes
         repo: https://github.com/kryptokardz/cryptocards.git
         dest: /home/ubuntu/cryptocards
-        version: development
+        version: async
         force: yes
 
     - name: change permissions of blockchain json to rw for all
