@@ -1,0 +1,33 @@
+{% extends 'cryptomonsters/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+     <div class="blockchain">
+            <h3 class="text-center">Blockchain Ledger</h3>
+        {% for chain in blockchain %}
+
+                <div class="col-lg-9 col-sm-12 col-md-9 col-xs-12">
+                 <div class="holder-para">
+                  <h4>{{ chain.index  }}</h4>
+                  <hr class="hr-short">
+                  <p class="font-2">
+                        {{ chain.timestamp }}
+                  </p>
+                  <p><strong>Owner:</strong> {{ chain.user }}</p>
+                  <p><strong>Previous Hash:</strong> {{ chain.previous_hash }}</p>
+                  <p><strong>Proof of Work:</strong> {{ chain.proof }}</p>
+                  <p><strong>Hash:</strong> {{ chain.hash }}</p>
+                  <p><strong>Monster Name:</strong> {{ chain.monster_data.name }}</p>
+                  <p><strong>Monster Type:</strong> {{ chain.monster_data.monster_type }}</p>
+                  <p><strong>Monster Attack:</strong> {{ chain.monster_data.unique_id }}</p>
+                  <p><strong>Monster Health:</strong> {{ chain.monster_data.health }}</p>
+                  <p><strong>Monster Defense:</strong> {{ chain.monster_data.defense }}</p>
+                 </div>
+              </div>
+
+        {% endfor %}
+    </div>
+
+{% endblock %}

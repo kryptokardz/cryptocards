@@ -3,8 +3,7 @@ input,select,textarea{
     font-family: 'Lora', serif;
 }
 
-
-.btn-primary{
+btn-primary{
     margin-top: -3%;
     width: 20%;
 }
@@ -61,4 +60,16 @@ form{
     color: #717171;
     text-align: center;
     width: 100%;
+}
+
+.mining_btn{
+    text-align: center;
+}
+.min_btn{
+    width: 25%;
+    display: inline-block;
+}
+
+.blockchain{
+    margin-left: 10%;
 }

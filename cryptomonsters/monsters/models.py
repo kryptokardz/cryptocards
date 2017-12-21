@@ -35,6 +35,7 @@ def random_type():
         ('Barbarian'),
         ('Minotaur'),
         ('Goblin'),
+        ('Ogre'),
     )
     return choice(types)
 

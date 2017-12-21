@@ -18,11 +18,12 @@
                 <div class="">
                         {% if monster.img_file.url %}
                         <div class="holder-img">
-                          <img class="round-img img-responsive center-block" src={% static monster.img_file.url %}>
+                          <img class="img-responsive center-block" src={% static monster.img_file.url %}>
                         </div>
                         {% endif %}
                 </div>
                   <h4>{{ monster.name  }} the {{ monster.monster_type }}</h4>
+                  <p><strong>Owner:</strong> {{ monster.user.username }}</p>
                   <p><strong>Monster Type:</strong> {{ monster.monster_type }}</p>
                   <p><strong>Health:</strong> {{ monster.health }}</p>
                   <p><strong>Defense:</strong> {{ monster.defense }}</p>
