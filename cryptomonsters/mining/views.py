@@ -57,17 +57,3 @@ class MiningNewBlock(LoginRequiredMixin, ListView):
         except AttributeError:
             context['async_id'] = async_id
             return context
-
-
-    # except AttributeError:
-    #     model = Monster
-    #     template_name = 'mining/mining_start.html'
-    #     redirect_field_name = '/accounts/login'
-
-    # def get_context_data(self, **kwargs):
-    #     """."""
-    #     context = super(MiningNewBlock, self).get_context_data(**kwargs)
-    #     user = context['view'].request.user
-    #     monster = blockchain.new_block(user)
-    #     context['data'] = monster
-    #     return context

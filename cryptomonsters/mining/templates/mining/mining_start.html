@@ -2,7 +2,15 @@
 
 {% load static %}
 
+{% block nav %}
+{% if ready is True %}
+{% include 'cryptomonsters/navbar.html'%}
+{% else %}
+{% endif %}
+{% endblock %}
+
 {% block content %}
+
 {% if ready is True %}
 <div class="wow-btn text-center">
     <img src="{% static  data.img_file.url  %}" width="250" height="250" />
@@ -21,7 +29,6 @@
 <div class="wow-btn text-center">
     <a class="btn btn-default wow-button" href="{% url 'mining_new_block' %}?id={{async_id}}">Check monster status.</a>
 </div>
-
 {% endif %}
 
 {% endblock %}

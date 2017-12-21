@@ -103,37 +103,17 @@ class BlockChain(object):
 
     def new_block(self, user):
         """Add a new block to the chain."""
-        # get previous block
         previous_block = self._get_previous_block()
-        # run proof of work function
-        # proof = self._proof_of_work(previous_block)
         ser_user = serializers.serialize('json', [user])
         proof_of_work = p_o_w.delay(previous_block, ser_user)
         async_id = (proof_of_work.as_tuple()[0][0])
-        # index = previous_block['index'] + 1
-        # monster = create_monster(user)
-        # timestamp = date.datetime.now().strftime("%c")
-        # previous_hash = previous_block['hash']
-        # user = user.username
-        # monster_data = {
-        #     'name': '{} the {}'.format(monster.name, monster.monster_type),
-        #     'health': monster.health,
-        #     'defense': monster.defense,
-        #     'attack': monster.attack,
-        #     'monster_type': monster.monster_type,
-        #     'unique_id': monster.pk,
-        #     'user': monster.user.username
-        # }
-        # new_block = Block(index, timestamp, previous_hash, user, monster_data, proof)
-        # self.chain.append(new_block)
-        print('async_id', async_id)
         return async_id
 
     def _proof_of_work(self, prev_block, ser_user):
         """Run proof of work algorithm to mine to block."""
         previous_block = prev_block
         previous_block_index = previous_block['index']
-        lead_zeros = 1
+        lead_zeros = 4
         nonce = 1
         proof_hash = self._calc_pow_hash(
             previous_block['index'], previous_block['timestamp'],
@@ -141,8 +121,6 @@ class BlockChain(object):
             previous_block['monster_data'], nonce)
         while str(proof_hash[0:lead_zeros]) != '0' * lead_zeros:
             check_previous_block = self._get_previous_block()
-            # if another user mines a block first and the block chain
-            # changes then start over
             if check_previous_block['index'] != previous_block_index:
                 nonce = 0
                 previous_block = check_previous_block
@@ -151,7 +129,6 @@ class BlockChain(object):
                 previous_block['index'], previous_block['timestamp'],
                 previous_block['previous_hash'], previous_block['user'],
                 previous_block['monster_data'], nonce)
-
         index = previous_block['index'] + 1
         des_user = serializers.deserialize('json', ser_user)
         user = next(des_user).object

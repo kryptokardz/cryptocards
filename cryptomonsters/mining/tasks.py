@@ -15,10 +15,6 @@ def rev(string):
 def p_o_w(previous_block, ser_user):
     """."""
     blckchain = blockchain.BlockChain()
-    i = 0
-    top = 99999999
-    while i < top:
-        i += 1
     blckchain._proof_of_work(previous_block, ser_user)
     return 'monster is created'
 
