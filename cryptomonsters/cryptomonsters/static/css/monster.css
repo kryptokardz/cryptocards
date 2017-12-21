@@ -62,3 +62,15 @@ form{
     text-align: center;
     width: 100%;
 }
+
+.mining_btn{
+    text-align: center;
+}
+.min_btn{
+    width: 25%;
+    display: inline-block;
+}
+
+.blockchain{
+    margin-left: 10%;
+}
