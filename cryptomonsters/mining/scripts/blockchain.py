@@ -178,7 +178,7 @@ def create_monster(user):
         'Barbarian': 'img/c_mon8.png',
         'Minotaur': 'img/c_mon9.png',
         'Goblin': 'img/c_mon10.png',
-        'Ogre': 'img/c_mon11/png',
+        'Ogre': 'img/c_mon11.png',
     }
     monster = Monster()
     backstory = {
