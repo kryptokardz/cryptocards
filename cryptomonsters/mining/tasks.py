@@ -4,14 +4,14 @@ from mining.scripts import blockchain
 import time
 
 
-@shared_task(name='tasks.rev')
+@shared_task(bind=True)
 def rev(string):
     time.sleep(10)
     a = string[::-1]
     return a
 
 
-@shared_task
+@shared_task(bind=True)
 def p_o_w(previous_block, ser_user):
     """."""
     blckchain = blockchain.BlockChain()
