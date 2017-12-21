@@ -13,16 +13,20 @@ def home_view(request):
 
 class ProfileView(LoginRequiredMixin, DetailView):
     """Display user data."""
-    model = Monster
     redirect_field_name = '/accounts/login'
     template_name = 'cryptomonsters/profile.html'
     context_object_name = 'user'
     redirect_field_name = '/accounts/login'
-    monsters_paginate_by = 4
 
     def get_object(self):
         """Return user data."""
         return self.request.user
+
+    def get_context_data(self, **kwargs):
+        """Get some data context."""
+        context = super(ProfileView, self).get_context_data()
+        context['monsters'] = Monster.objects.filter(user=self.get_object())
+        return context
 
 
 class UpdateUser(LoginRequiredMixin, UpdateView):
