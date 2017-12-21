@@ -1,8 +1,6 @@
-"""Base views for cryptomonsters."""
-from monsters.models import Monster
+"""Base views for Cryptomonsters."""
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render
 from django.views.generic import DetailView, UpdateView
 

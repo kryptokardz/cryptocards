@@ -23,22 +23,6 @@ form{
         margin: auto;
         text-align: center;
     }
-    .monster{
-
-    }
-}
-
-@media (max-width: 1000px){
-    .monster{
-        float: left;
-        width: 50%;
-        min-width: 250px;
-        margin: auto;
-        text-align: center;
-    }
-    .monster{
-
-    }
 }
 
 @media (max-width: 525px){
@@ -48,9 +32,6 @@ form{
         min-width: 250px;
         margin: auto;
         text-align: center;
-    }
-    .monster{
-
     }
 }
 
@@ -72,4 +53,18 @@ form{
 
 .blockchain{
     margin-left: 10%;
+    overflow: auto;
+}
+.errorlist{
+    font-weight: bolder;
+}
+.monster_icon{
+    width: 20%;
+}
+.scrollable{
+    height: 33em;
+    overflow: auto;
+}
+.the_scrolled{
+    height: fit-content;
 }

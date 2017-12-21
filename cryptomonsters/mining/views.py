@@ -3,6 +3,7 @@ import json
 
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from django.views.generic import ListView
 from mining.scripts.blockchain import BlockChain
@@ -64,12 +65,21 @@ class MiningNewBlock(LoginRequiredMixin, ListView):
 
 
 def blockchain_view(request):
-    """Veiw the blockchain."""
+    """View the blockchain."""
     if settings.DEBUG:
         with open('cryptomonsters/static/blockchain/blockchain.json') as file:
             chain = json.load(file)
     else:
         with open(settings.STATIC_URL + 'blockchain/blockchain.json') as file:
             chain = json.load(file)
-    return render(request, 'mining/blockchain.html', {'blockchain': chain})
+    page = request.GET.get('page', 1)
+    paginator = Paginator(chain[::-1], 5)
+    try:
+        blocks = paginator.page(page)
+    except PageNotAnInteger:
+        blocks = paginator.page(1)
+    except EmptyPage:
+        blocks = paginator.page(paginator.num_pages)
+
+    return render(request, 'mining/blockchain.html', {'blockchain': blocks})
 
