@@ -22,12 +22,6 @@ class ProfileView(LoginRequiredMixin, DetailView):
         """Return user data."""
         return self.request.user
 
-    def get_context_data(self, **kwargs):
-        """Get some data context."""
-        context = super(ProfileView, self).get_context_data()
-        context['monsters'] = Monster.objects.filter(user=self.get_object())
-        return context
-
 
 class UpdateUser(LoginRequiredMixin, UpdateView):
     """Update user information."""

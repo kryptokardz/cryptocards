@@ -8,8 +8,8 @@
   <div class="container">
     <h2 class="text-center">{{ user.username }}</h2>
     <hr class="hr-mid">
-    <div class='scrolling'>
-      <section class="Element-heading">
+    <div style='height: 33em; overflow: auto;'>
+      <section class="Element-heading" style='height: fit-content;'>
         <h3 class="text-center">Your Monsters</h3>
 
         {% for monster in user.monsters.all reversed %}
