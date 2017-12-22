@@ -17,10 +17,10 @@ def random_name():
 
 
 def random_stats():
-    """Return a randomized stat between 0 and 20."""
+    """Generate and return a randomized stat between 0 and 20."""
     first_digit = choice(list(itertools.chain([0 for _ in range(1, 14)], [1 for _ in range(14, 19)], [2])))
     if first_digit == 0:
-        stat = first_digit + choice([x for x in range(10)])
+        stat = first_digit + choice([x for x in range(1, 10)])
     elif first_digit == 1:
         stat = int(str(first_digit) + str(choice([x for x in range(10)])))
     else:
