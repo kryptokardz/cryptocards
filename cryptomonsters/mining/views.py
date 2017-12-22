@@ -24,7 +24,7 @@ class MiningHomeView(LoginRequiredMixin, ListView):
     redirect_field_name = '/accounts/login'
 
 
-class MiningStart(LoginRequiredMixin, ListView):
+class MiningStart(LoginRequiredMixin, ListView):  # pragma: no cover
     """."""
 
     model = Monster
@@ -41,7 +41,7 @@ class MiningStart(LoginRequiredMixin, ListView):
         return context
 
 
-class MiningNewBlock(LoginRequiredMixin, ListView):
+class MiningNewBlock(LoginRequiredMixin, ListView):  # pragma: no cover
     """."""
 
     model = Monster
@@ -67,20 +67,15 @@ class MiningNewBlock(LoginRequiredMixin, ListView):
 
 def blockchain_view(request):
     """View the blockchain."""
-    if settings.DEBUG:
-        with open('cryptomonsters/static/blockchain/blockchain.json') as file:
-            chain = json.load(file)
-    else:
-        with open(settings.STATIC_URL + 'blockchain/blockchain.json') as file:
-            chain = json.load(file)
+    with open('cryptomonsters/static/blockchain/blockchain.json') as file:
+        chain = json.load(file)
     page = request.GET.get('page', 1)
     paginator = Paginator(chain[::-1], 5)
     try:
         blocks = paginator.page(page)
-    except PageNotAnInteger:
+    except PageNotAnInteger:  # pragma: no cover
         blocks = paginator.page(1)
-    except EmptyPage:
+    except EmptyPage:  # pragma: no cover
         blocks = paginator.page(paginator.num_pages)
 
     return render(request, 'mining/blockchain.html', {'blockchain': blocks})
-
