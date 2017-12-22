@@ -11,7 +11,7 @@ import time
 #     return a
 
 
-@shared_task(bind=True)
+@shared_task(name='tasks.p_o_w')
 def p_o_w(previous_block, ser_user):
     """."""
     blckchain = blockchain.BlockChain()
