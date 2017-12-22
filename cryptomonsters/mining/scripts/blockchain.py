@@ -1,4 +1,4 @@
-"""."""
+"""Module to create blockchain."""
 from django.conf import settings
 from monsters.models import Monster
 import monsters.scripts.stories as story
@@ -42,7 +42,7 @@ class Block(object):
         return sha.hexdigest()
 
     def view_block(self):
-        """."""
+        """View current block."""
         block = json.dumps({
             'index': self.index,
             'timestamp': self.timestamp,
@@ -56,7 +56,7 @@ class Block(object):
         return block
 
     def _update_chain(self):
-        """."""
+        """Update json file with blockchain."""
         block = {
             'index': self.index,
             'timestamp': self.timestamp,
@@ -85,7 +85,7 @@ class BlockChain(object):
 
     @property
     def chain(self):
-        """."""
+        """Blockchain json file asssigned as property."""
         with open('cryptomonsters/static/blockchain/blockchain.json') as file:
             chain = json.load(file)
         return chain
@@ -113,11 +113,6 @@ class BlockChain(object):
             previous_block['previous_hash'], previous_block['user'],
             previous_block['monster_data'], nonce)
         while str(proof_hash[0:lead_zeros]) != '0' * lead_zeros:
-            # check_previous_block = self._get_previous_block()
-            # if check_previous_block['index'] != previous_block_index:
-            #     print('previous reset')
-            #     nonce = 0
-            #     previous_block = check_previous_block
             nonce += 1
             proof_hash = self._calc_pow_hash(
                 previous_block['index'], previous_block['timestamp'],
@@ -162,7 +157,7 @@ class BlockChain(object):
 
 
 def create_monster(user):
-    """."""
+    """Create monster after mining is complete."""
     types = {
         'Zombie': 'img/c_mon1.png',
         'Slime': 'img/c_mon2.png',
