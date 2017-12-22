@@ -6,22 +6,22 @@ from celery import Celery
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cryptomonsters.settings')
 
 # app = Celery('proj')
-app = Celery('cryptomonsters',
-             broker='redis://172-31-44-132',
+celery = Celery('cryptomonsters',
+             broker='redis://localhost',
              # backend='db+postgresql://localhost:5432/async_tasks'
-             backend='redis://172-31-44-132'
+             backend='redis://localhost'
              )
 CELERY_IMPORTS = ["mining.tasks"]
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.
 # - namespace='CELERY' means all celery-related configuration keys
 #   should have a `CELERY_` prefix.
-app.config_from_object('django.conf:settings', namespace='CELERY')
+celery.config_from_object('django.conf:settings', namespace='CELERY')
 
-# Load task modules from all registered Django app configs.
-app.autodiscover_tasks()
+# Load task modules from all registered Django celery configs.
+celery.autodiscover_tasks()
 
 
-@app.task(bind=True)
+@celery.task(bind=True)
 def debug_task(self):
     print('Request: {0!r}'.format(self.request))

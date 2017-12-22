@@ -4,11 +4,11 @@ from mining.scripts import blockchain
 import time
 
 
-@shared_task(bind=True)
-def rev(string):
-    time.sleep(10)
-    a = string[::-1]
-    return a
+# @shared_task(bind=True)
+# def rev(string):
+#     time.sleep(10)
+#     a = string[::-1]
+#     return a
 
 
 @shared_task(bind=True)
