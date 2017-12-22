@@ -188,7 +188,7 @@ class MainRoutingTests(TestCase):
         })
         activation = re.findall('/accounts/activate/.+/', mail.outbox[0].body)
         response = self.client.get(activation[0], follow=True)
-        self.assertIn(b'Thank you! You are activated!', response.content)
+        self.assertIn(b'Thank you! Your account is now active!', response.content)
 
     def test_register_with_activation_valid_user_password_activates_user(self):
         """Test if valid user with password is activated, activates user."""

@@ -10,4 +10,3 @@ def p_o_w(previous_block, ser_user):
     bc = scripts.blockchain.BlockChain()
     data = bc._proof_of_work(previous_block, ser_user)
     return 'monster {} is created, nonce: {}'.format(data[1], data[0])
-
