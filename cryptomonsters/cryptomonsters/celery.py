@@ -7,9 +7,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cryptomonsters.settings')
 
 # app = Celery('proj')
 app = Celery('cryptomonsters',
-             broker='redis://localhost',
+             broker='redis://172-31-44-132',
              # backend='db+postgresql://localhost:5432/async_tasks'
-             backend='redis://localhost'
+             backend='redis://172-31-44-132'
              )
 CELERY_IMPORTS = ["mining.tasks"]
 # Using a string here means the worker doesn't have to serialize
