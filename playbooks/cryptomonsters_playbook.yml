@@ -30,23 +30,23 @@
         mode: 0666
 
     - name: create python3 virtual enviroment
-      command: python3 -m venv /home/ubuntu/cryptocards
+      command: python3 -m venv /home/ubuntu/ENV
 
     - name: update pip
       pip:
         name: pip
         extra_args: --upgrade
-        virtualenv: /home/ubuntu/cryptocards
+        virtualenv: /home/ubuntu/ENV
 
     - name: install gunicorn in the enviroment
       pip:
         name: gunicorn
-        virtualenv: /home/ubuntu/cryptocards
+        virtualenv: /home/ubuntu/ENV
 
     - name: install required packages
       pip:
         requirements: /home/ubuntu/cryptocards/requirements.txt
-        virtualenv: /home/ubuntu/cryptocards
+        virtualenv: /home/ubuntu/ENV
 
     - name: register the old default file
       stat: path=/etc/nginx/sites-available/default.old
@@ -80,7 +80,7 @@
       django_manage: 
         command: collectstatic
         app_path: /home/ubuntu/cryptocards/cryptomonsters/
-        virtualenv: /home/ubuntu/cryptocards
+        virtualenv: /home/ubuntu/ENV
 
     # - name: migrate rds
     #   environment:
