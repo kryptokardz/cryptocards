@@ -19,4 +19,4 @@ env DB_NAME='{{ DB_NAME }}'
 env DB_HOST='{{ DB_HOST }}'
 
 
-exec /home/ubuntu/cryptocards/bin/gunicorn -b :8080 cryptomonsters.wsgi
+exec /home/ubuntu/ENV/bin/gunicorn -b :8080 cryptomonsters.wsgi
