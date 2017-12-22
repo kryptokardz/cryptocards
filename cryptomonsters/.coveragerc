@@ -6,6 +6,7 @@ omit = ../*migrations*
         *cryptomonsters/celery.py*
         *mining/tasks.py*
         *cryptomonsters/__init__.py*
+        *monsters/models.py*
 
 [report]
 show_missing = True

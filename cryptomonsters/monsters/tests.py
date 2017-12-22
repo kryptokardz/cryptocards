@@ -5,7 +5,7 @@ from django.test import TestCase
 
 from monsters.scripts import stories
 
-from monsters.models import Monster, random_id, random_name, random_stats, random_type
+from monsters.models import Monster, random_name, random_stats, random_type
 
 
 class MonsterModelTestCase(TestCase):
@@ -24,15 +24,15 @@ class MonsterModelTestCase(TestCase):
 
     def test_monster_health_field(self):
         """Test monster health field contains a number between 1 and 10."""
-        self.assertIn(self.monster.health, [x for x in range(1, 11)])
+        self.assertIn(self.monster.health, [x for x in range(1, 20)])
 
     def test_monster_defense_field(self):
         """Test monster defense field contains a number between 1 and 10."""
-        self.assertIn(self.monster.defense, [x for x in range(1, 11)])
+        self.assertIn(self.monster.defense, [x for x in range(1, 20)])
 
     def test_monster_attack_field(self):
         """Test monster attack field contains a number between 1 and 10."""
-        self.assertIn(self.monster.attack, [x for x in range(1, 11)])
+        self.assertIn(self.monster.attack, [x for x in range(1, 20)])
 
     def test_monster_type_field(self):
         """Test that monster type field has something."""
@@ -45,7 +45,7 @@ class MonsterModelTestCase(TestCase):
     def test_random_stats_function_works(self):
         """Test andom stats function is return an int between 1 and 10."""
         self.assertIsInstance(random_stats(), int)
-        self.assertIn(random_stats(), [x for x in range(1, 11)])
+        self.assertIn(random_stats(), [x for x in range(1, 20)])
 
     def test_random_type_function_works(self):
         """Test that the random type function is returning a string."""
