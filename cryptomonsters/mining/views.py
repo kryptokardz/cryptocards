@@ -67,12 +67,8 @@ class MiningNewBlock(LoginRequiredMixin, ListView):
 
 def blockchain_view(request):
     """View the blockchain."""
-    if not settings.DEBUG:
-        with open('cryptomonsters/static/blockchain/blockchain.json') as file:
-            chain = json.load(file)
-    else:
-        with open(settings.STATIC_URL + 'blockchain/blockchain.json') as file:
-            chain = json.load(file)
+    with open('cryptomonsters/static/blockchain/blockchain.json') as file:
+        chain = json.load(file)
     page = request.GET.get('page', 1)
     paginator = Paginator(chain[::-1], 5)
     try:
