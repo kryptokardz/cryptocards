@@ -42,10 +42,6 @@ class MonsterModelTestCase(TestCase):
         """Test that the random name function is returning a string."""
         self.assertIsInstance(random_name(), str)
 
-    def test_random_id_function_works(self):
-        """Test that the random id function is returning an int."""
-        self.assertIsInstance(random_id(), int)
-
     def test_random_stats_function_works(self):
         """Test andom stats function is return an int between 1 and 10."""
         self.assertIsInstance(random_stats(), int)
