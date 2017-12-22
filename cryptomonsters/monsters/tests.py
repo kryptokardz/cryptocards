@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.test import TestCase
-from .models import Monster, random_name, random_id, random_stats, random_type
+from .models import Monster, random_name, random_stats, random_type
 
 
 class MonsterModelTestCase(TestCase):
@@ -36,10 +36,6 @@ class MonsterModelTestCase(TestCase):
     def test_random_name_function_works(self):
         """Test that the random name function is returning a string."""
         self.assertIsInstance(random_name(), str)
-
-    def test_random_id_function_works(self):
-        """Test that the random id function is returning an int."""
-        self.assertIsInstance(random_id(), int)
 
     def test_random_stats_function_works(self):
         """Test that the random stats function is return an int between 1 and 10."""
