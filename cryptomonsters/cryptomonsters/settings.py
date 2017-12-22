@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_nose',
+    'social_django',
     'cryptomonsters',
     'storages',
     'mining',
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'cryptomonsters.urls'
@@ -76,22 +78,47 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
 
+
+# social media login settings
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.google.GoogleOAuth',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+SOCIAL_AUTH_TWITTER_KEY = os.environ.get('SOCIAL_AUTH_TWITTER_KEY')
+SOCIAL_AUTH_TWITTER_SECRET = os.environ.get('SOCIAL_AUTH_TWITTER_SECRET')
+SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('SOCIAL_AUTH_FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('SOCIAL_AUTH_FACEBOOK_SECRET')
+SOCIAL_AUTH_GOOGLE_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_KEY')
+SOCIAL_AUTH_GOOGLE_SECRET = os.environ.get('SOCIAL_AUTH_GOOGLE_SECRET')
+
 WSGI_APPLICATION = 'cryptomonsters.wsgi.application'
 
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'home'
-ACCOUNT_ACTIVATION_DAYS = 7
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'cryptomonsterz@gmail.com'
-EMAIL_HOST_PASSWORD = 'hbbnnkjpxzpxewbi'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+ACCOUNT_ACTIVATION_DAYS = 7
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = 'cryptomonsterz@gmail.com'
+    EMAIL_HOST_PASSWORD = 'hbbnnkjpxzpxewbi'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
 
 
 # Database
@@ -151,6 +178,9 @@ USE_TZ = True
 
 # Amazon Web Services Configuration
 if DEBUG:
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
+else:
     AWS_STORAGE_BUCKET_NAME = 'cryptomonsters'
     AWS_ACCESS_KEY_ID = os.environ.get('IAM_USER_ACCESS_KEY_ID', '')
     AWS_SECRET_ACCESS_KEY = os.environ.get('IAM_USER_SECRET_ACCESS_KEY', '')
@@ -163,6 +193,8 @@ if DEBUG:
     STATIC_URL = 'https://{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 
 
-else:
-    STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# CELERY SETTINGS
+BROKER_URL = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'

@@ -8,10 +8,10 @@
   <div class="container">
     <h2 class="text-center">{{ user.username }}</h2>
     <hr class="hr-mid">
-    <div style='height: 33em; overflow: auto;'>
-      <section class="Element-heading" style='height: fit-content;'>
+    <div class='scrollable'>
+      <section class="Element-heading the_scrolled">
         <h3 class="text-center">Your Monsters</h3>
-
+        <hr>
         {% for monster in user.monsters.all reversed %}
         <div class="row">
           <div class="col-lg-9 col-sm-12 col-md-9 col-xs-12">
@@ -19,16 +19,16 @@
               <h4>{{ monster.name  }} the {{ monster.monster_type }}</h4>
               <hr class="hr-short">
               <p class="font-2">{{ monster.monster_story }}</p>
+              <p><strong>Health: </strong> {{ monster.health }}</p>
+              <p><strong>Attack: </strong> {{ monster.attack }}</p>
+              <p><strong>Defense: </strong> {{ monster.defense }}</p>
               <p><strong>Monster Type:</strong> {{ monster.monster_type }}</p>
-              <p><strong>Health:</strong> {{ monster.health }}</p>
-              <p><strong>Defense:</strong> {{ monster.defense }}</p>
-              <p><strong>Attack:</strong> {{ monster.attack }}</p>
               <p><strong>Unique Id:</strong> {{ monster.unique_id }}</p>
             </div>
           </div>
           <div class="col-lg-3 col-xs-12 col-sm-12 col-md-3">
             <div class="holder-img">
-              <img class="round-img img-responsive center-block" src={% static monster.img_file.url %}>
+              <img class="img-responsive center-block" src={% static monster.img_file.url %}>
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@
       <section class="Element-heading">
         <div class="row btn-line">
           <div class="col-lg-3 col-md-3 col-sm-3 col-xs-11">
-            <a class="btn btn-default call-btn-1" href="{% url 'updateuser' %}">edit account</a>
+            <a class="btn btn-default call-btn-1 space" href="{% url 'updateuser' %}">edit account</a>
           </div>
         </div>
       </section>
