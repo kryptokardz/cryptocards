@@ -67,7 +67,7 @@ class MiningNewBlock(LoginRequiredMixin, ListView):
 
 def blockchain_view(request):
     """View the blockchain."""
-    if settings.DEBUG:
+    if not settings.DEBUG:
         with open('cryptomonsters/static/blockchain/blockchain.json') as file:
             chain = json.load(file)
     else:
