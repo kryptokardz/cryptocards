@@ -6,6 +6,7 @@ from celery import Celery
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cryptomonsters.settings')
 
 # app = Celery('proj')
+# settings.configure()
 app = Celery('cryptomonsters',
              broker='redis://localhost',
              # backend='db+postgresql://localhost:5432/async_tasks'

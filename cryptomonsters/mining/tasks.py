@@ -17,4 +17,3 @@ def p_o_w(previous_block, ser_user):
     blckchain = blockchain.BlockChain()
     blckchain._proof_of_work(previous_block, ser_user)
     return 'monster is created'
-
