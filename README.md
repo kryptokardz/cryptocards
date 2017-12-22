@@ -13,7 +13,9 @@ This is a work in progress and hopefully we will remember to keep this updated a
 
 ## Artist
 Artwork by Travis Koon
+
 Backstories by Matthew Cornmesser
+
 Mining goblins by [Dillon Wall](https://www.dillonwall.com)
 
 
@@ -80,7 +82,7 @@ You can test this application by first exporting an environmental variable point
 ## Deploying
 You can deploy this application to AWS using Ansible.
 
-```[Sign Up for AWS](https://aws.amazon.com/)
+Sign Up for AWS](https://aws.amazon.com/)
 
 [Setting Up with Amazon EC2](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html)
 
