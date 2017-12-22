@@ -1,13 +1,8 @@
 """Module to create blockchain."""
-from django.conf import settings
-from monsters.models import Monster
-import monsters.scripts.stories as story
-from django.core import serializers
 import datetime as date
 import hashlib
 import json
 
-from django.conf import settings
 from django.core import serializers
 
 from monsters.models import Monster
