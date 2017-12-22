@@ -141,7 +141,7 @@ class BlockChain(object):
         }
         new_block = Block(index, timestamp, previous_hash, user, monster_data, proof_hash)
         self.chain.append(new_block)
-        return
+        return nonce, monster.name
 
     def _calc_pow_hash(self, index, timestamp, previous_hash, user, monster_data, nonce):
         """Calc new hash until the POW requirements are met."""
