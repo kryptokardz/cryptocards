@@ -106,7 +106,7 @@ class BlockChain(object):
         """Run proof of work algorithm to mine to block."""
         previous_block = prev_block
         previous_block_index = previous_block['index']
-        lead_zeros = 4
+        lead_zeros = 2
         nonce = 1
         proof_hash = self._calc_pow_hash(
             previous_block['index'], previous_block['timestamp'],
