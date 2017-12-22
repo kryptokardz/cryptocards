@@ -115,6 +115,7 @@ class BlockChain(object):
         while str(proof_hash[0:lead_zeros]) != '0' * lead_zeros:
             check_previous_block = self._get_previous_block()
             if check_previous_block['index'] != previous_block_index:
+                print('previous reset')
                 nonce = 0
                 previous_block = check_previous_block
             nonce += 1
