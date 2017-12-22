@@ -17,7 +17,7 @@ conn = redis.Redis('localhost')
 
 
 class MiningHomeView(LoginRequiredMixin, ListView):
-    """."""
+    """View to start mining."""
 
     model = Monster
     template_name = 'mining/mining.html'
@@ -25,14 +25,14 @@ class MiningHomeView(LoginRequiredMixin, ListView):
 
 
 class MiningStart(LoginRequiredMixin, ListView):  # pragma: no cover
-    """."""
+    """View to show goblin gif while mining is happening."""
 
     model = Monster
     template_name = 'mining/mining_start.html'
     redirect_field_name = '/accounts/login'
 
     def get_context_data(self, **kwargs):
-        """."""
+        """Return the context id which is key for redis."""
         context = super(MiningStart, self).get_context_data(**kwargs)
         user = context['view'].request.user
         async_id = blockchain.new_block(user)
@@ -42,14 +42,14 @@ class MiningStart(LoginRequiredMixin, ListView):  # pragma: no cover
 
 
 class MiningNewBlock(LoginRequiredMixin, ListView):  # pragma: no cover
-    """."""
+    """Check if monster is done being mined for."""
 
     model = Monster
     template_name = 'mining/mining_start.html'
     redirect_field_name = '/accounts/login'
 
     def get_context_data(self, **kwargs):
-        """."""
+        """If the monster is ready then send it to view else keep waiting."""
         context = super(MiningNewBlock, self).get_context_data(**kwargs)
         async_id = self.request.GET['id']
         try:
@@ -67,12 +67,8 @@ class MiningNewBlock(LoginRequiredMixin, ListView):  # pragma: no cover
 
 def blockchain_view(request):
     """View the blockchain."""
-    # if settings.DEBUG:
     with open('cryptomonsters/static/blockchain/blockchain.json') as file:
         chain = json.load(file)
-    # else:
-    #     with open(settings.STATIC_URL + 'blockchain/blockchain.json') as file:
-    #         chain = json.load(file)
     page = request.GET.get('page', 1)
     paginator = Paginator(chain[::-1], 5)
     try:

@@ -1,4 +1,8 @@
-"""Blockchain."""
+"""Module to create blockchain."""
+from django.conf import settings
+from monsters.models import Monster
+import monsters.scripts.stories as story
+from django.core import serializers
 import datetime as date
 import hashlib
 import json
@@ -45,7 +49,7 @@ class Block(object):
         return sha.hexdigest()
 
     def view_block(self):
-        """View blockchain."""
+        """View current block."""
         block = json.dumps({
             'index': self.index,
             'timestamp': self.timestamp,
@@ -59,7 +63,7 @@ class Block(object):
         return block
 
     def _update_chain(self):
-        """Update blockchain file."""
+        """Update json file with blockchain."""
         block = {
             'index': self.index,
             'timestamp': self.timestamp,
@@ -69,18 +73,11 @@ class Block(object):
             'proof': self.proof,
             'hash': self.hash
         }
-        if settings.DEBUG:
-            with open('cryptomonsters/static/blockchain/blockchain.json') as file:
-                chain = json.load(file)
-            chain.append(block)
-            with open('cryptomonsters/static/blockchain/blockchain.json', 'w') as file:
-                json.dump(chain, file)
-        else:
-            with open(settings.STATIC_URL + 'blockchain/blockchain.json') as file:
-                chain = json.load(file)
-            chain.append(block)
-            with open(settings.STATIC_URL + 'blockchain/blockchain.json', 'w') as file:
-                json.dump(chain, file)
+        with open('cryptomonsters/static/blockchain/blockchain.json') as file:
+            chain = json.load(file)
+        chain.append(block)
+        with open('cryptomonsters/static/blockchain/blockchain.json', 'w') as file:
+            json.dump(chain, file)
 
 
 class BlockChain(object):
@@ -95,7 +92,7 @@ class BlockChain(object):
 
     @property
     def chain(self):
-        """Create blockchain file."""
+        """Blockchain json file asssigned as property."""
         with open('cryptomonsters/static/blockchain/blockchain.json') as file:
             chain = json.load(file)
         return chain
@@ -116,17 +113,13 @@ class BlockChain(object):
         """Run proof of work algorithm to mine to block."""
         previous_block = prev_block
         previous_block_index = previous_block['index']
-        lead_zeros = 4
+        lead_zeros = 5
         nonce = 1
         proof_hash = self._calc_pow_hash(
             previous_block['index'], previous_block['timestamp'],
             previous_block['previous_hash'], previous_block['user'],
             previous_block['monster_data'], nonce)
         while str(proof_hash[0:lead_zeros]) != '0' * lead_zeros:
-            check_previous_block = self._get_previous_block()
-            if check_previous_block['index'] != previous_block_index:
-                nonce = 0
-                previous_block = check_previous_block
             nonce += 1
             proof_hash = self._calc_pow_hash(
                 previous_block['index'], previous_block['timestamp'],
@@ -150,7 +143,7 @@ class BlockChain(object):
         }
         new_block = Block(index, timestamp, previous_hash, user, monster_data, proof_hash)
         self.chain.append(new_block)
-        return
+        return nonce, monster.name
 
     def _calc_pow_hash(self, index, timestamp, previous_hash, user, monster_data, nonce):
         """Calc new hash until the POW requirements are met."""
@@ -171,7 +164,7 @@ class BlockChain(object):
 
 
 def create_monster(user):
-    """Create new monster."""
+    """Create monster after mining is complete."""
     types = {
         'Zombie': 'img/c_mon1.png',
         'Slime': 'img/c_mon2.png',
