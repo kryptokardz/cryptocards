@@ -1,11 +1,14 @@
-"""."""
-from django.conf import settings
-from monsters.models import Monster
-import monsters.scripts.stories as story
-from django.core import serializers
+"""Blockchain."""
 import datetime as date
 import hashlib
 import json
+
+from django.conf import settings
+from django.core import serializers
+
+from monsters.models import Monster
+import monsters.scripts.stories as story
+
 from ..tasks import p_o_w
 
 
@@ -42,7 +45,7 @@ class Block(object):
         return sha.hexdigest()
 
     def view_block(self):
-        """."""
+        """View blockchain."""
         block = json.dumps({
             'index': self.index,
             'timestamp': self.timestamp,
@@ -56,7 +59,7 @@ class Block(object):
         return block
 
     def _update_chain(self):
-        """."""
+        """Update blockchain file."""
         block = {
             'index': self.index,
             'timestamp': self.timestamp,
@@ -92,7 +95,7 @@ class BlockChain(object):
 
     @property
     def chain(self):
-        """."""
+        """Create blockchain file."""
         with open('cryptomonsters/static/blockchain/blockchain.json') as file:
             chain = json.load(file)
         return chain
@@ -101,7 +104,7 @@ class BlockChain(object):
         """Get the previous block in the chains."""
         return self.chain[-1]
 
-    def new_block(self, user):
+    def new_block(self, user):  # pragma: no cover
         """Add a new block to the chain."""
         previous_block = self._get_previous_block()
         ser_user = serializers.serialize('json', [user])
@@ -109,7 +112,7 @@ class BlockChain(object):
         async_id = (proof_of_work.as_tuple()[0][0])
         return async_id
 
-    def _proof_of_work(self, prev_block, ser_user):
+    def _proof_of_work(self, prev_block, ser_user):  # pragma: no cover
         """Run proof of work algorithm to mine to block."""
         previous_block = prev_block
         previous_block_index = previous_block['index']
@@ -168,7 +171,7 @@ class BlockChain(object):
 
 
 def create_monster(user):
-    """."""
+    """Create new monster."""
     types = {
         'Zombie': 'img/c_mon1.png',
         'Slime': 'img/c_mon2.png',
