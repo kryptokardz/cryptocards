@@ -11,6 +11,14 @@ This is a work in progress and hopefully we will remember to keep this updated a
 **[John Jensen](https://www.github.com/thejohnjensen)** -
 **[Chaitanya Narukulla](https://www.github.com/chaitanyanarukulla)**-
 
+## Artist
+Artwork by Travis Koon
+Backstories by Matthew Cornmesser
+Mining goblins by [Dillon Wall](https://www.dillonwall.com)
+
+
+## Backstory
+
 
 ## Getting Started
 
