@@ -1,0 +1,22 @@
+description "cryptocards deployment"
+
+start on [2345]
+stop on runlevel [!2345]
+
+respawn
+setuid nobody
+setgid nogroup
+chdir /home/ubuntu/cryptocards/cryptomonsters
+
+env SECRET_KEY='{{ secret_key }}'
+env DEBUG='{{ DEBUG }}'
+env IAM_USER_ACCESS_KEY_ID=""
+env IAM_USER_SECRET_ACCESS_KEY=""
+env AWS_STORAGE_BUCKET_NAME='cryptomonsters'
+env DB_USER='{{ DB_USER }}'
+env DB_PASS='{{ DB_PASS }}'
+env DB_NAME='{{ DB_NAME }}'
+env DB_HOST='{{ DB_HOST }}'
+
+
+exec /home/ubuntu/ENV/bin/gunicorn -b :8080 cryptomonsters.wsgi

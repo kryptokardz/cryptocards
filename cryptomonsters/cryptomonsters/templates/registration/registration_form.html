@@ -1,0 +1,14 @@
+{% extends 'cryptomonsters/base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="update_form">
+  <h2 style="text-align:center;">Register</h2><hr>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Register" class="btn btn-default call-btn-1" style='background-color: rgb(232,232,232);'/>
+  </form>
+  </div>
+{% endblock %}

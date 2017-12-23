@@ -1,0 +1,10 @@
+{% extends 'cryptomonsters/base.html' %}
+
+{% block content %}
+<h1 class='text-center'>Time to mine!</h1>
+<p class='text-center'>Once you give the below button a click you will be rewarded for all your computers hard work with your very own monster!</p>
+<p class='text-center'>Like the one you just got? Why not mine again!</p>
+ <div class="wow-btn text-center">
+    <a class="btn btn-default wow-button" href="{% url 'mining_start' %}">Start Mining</a>
+</div>
+{% endblock %}
