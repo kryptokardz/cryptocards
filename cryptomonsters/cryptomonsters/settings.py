@@ -25,8 +25,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DEBUG', ''))
 
-ALLOWED_HOSTS = ['127.0.0.1', 'LOCALHOST']
-
+# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '')
+ALLOWED_HOSTS = ['ec2-34-215-7-234.us-west-2.compute.amazonaws.com',
+                 '127.0.0.1', 'LOCALHOST']
 
 # Application definition
 
@@ -37,7 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cryptomonsters'
+    'django_nose',
+    'social_django',
+    'cryptomonsters',
+    'storages',
+    'mining',
+    'monsters',
 ]
 
 MIDDLEWARE = [
@@ -48,9 +54,18 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'cryptomonsters.urls'
+
+# Use nose to run all tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=cryptomonsters,mining,monsters',
+]
 
 TEMPLATES = [
     {
@@ -63,12 +78,47 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
 
+
+# social media login settings
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.google.GoogleOAuth',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+SOCIAL_AUTH_TWITTER_KEY = os.environ.get('SOCIAL_AUTH_TWITTER_KEY')
+SOCIAL_AUTH_TWITTER_SECRET = os.environ.get('SOCIAL_AUTH_TWITTER_SECRET')
+SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('SOCIAL_AUTH_FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('SOCIAL_AUTH_FACEBOOK_SECRET')
+SOCIAL_AUTH_GOOGLE_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_KEY')
+SOCIAL_AUTH_GOOGLE_SECRET = os.environ.get('SOCIAL_AUTH_GOOGLE_SECRET')
+
 WSGI_APPLICATION = 'cryptomonsters.wsgi.application'
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'home'
+
+ACCOUNT_ACTIVATION_DAYS = 7
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = 'cryptomonsterz@gmail.com'
+    EMAIL_HOST_PASSWORD = 'hbbnnkjpxzpxewbi'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
 
 
 # Database
@@ -78,9 +128,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DB_NAME', ''),
-        # 'USER': os.environ.get('DB_USER', ''),
-        # 'PASSWORD': os.environ.get('DB_PASSWORD', ''),
-        # 'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'USER': os.environ.get('DB_USER', ''),
+        'PASSWORD': os.environ.get('DB_PASS', ''),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
         'PORT': '5432',
         'TEST': {
             'NAME': os.environ.get('TEST_DB', ''),
@@ -125,4 +175,26 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
+
+# Amazon Web Services Configuration
+if DEBUG:
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
+else:
+    AWS_STORAGE_BUCKET_NAME = 'cryptomonsters'
+    AWS_ACCESS_KEY_ID = os.environ.get('IAM_USER_ACCESS_KEY_ID', '')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('IAM_USER_SECRET_ACCESS_KEY', '')
+    AWS_S3_HOST = 's3-us-west-2.amazonaws.com'
+
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+    STATICFILES_LOCATION = 'static'
+    STATICFILES_STORAGE = 'cryptomonsters.custom_storages.StaticStorage'
+    STATIC_URL = 'https://{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+
+
+# CELERY SETTINGS
+BROKER_URL = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'

@@ -1,0 +1,18 @@
+{% extends 'cryptomonsters/base.html' %}
+
+{% block title %}Hooray!{% endblock %}
+
+{% block content %}
+  <h2 style='text-align: center;'>Congratulations!!</h2>
+
+  <h3 style='text-align: center;'>Thank you! Your account is now active!</h3>
+  <p style='text-align: center;'>This means you can now mine for your very own collection of monsters. Enjoy!.</p>
+  <p style='text-align: center;'>Redirecting to homepage...</p>
+  <script>
+    function redirect(){
+       window.location.href = "{% url 'home' %}";
+    }
+
+    setTimeout(redirect, 5000);
+</script>
+{% endblock %}

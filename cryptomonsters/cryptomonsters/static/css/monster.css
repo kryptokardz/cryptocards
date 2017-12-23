@@ -1,0 +1,95 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+input,select,textarea{
+    width: 40%;
+    font-family: 'Lora', serif;
+}
+
+btn-primary{
+    margin-top: -3%;
+    width: 20%;
+}
+
+form{
+    margin-left: 25%;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+.foot-img{
+    max-width: 50%;
+}
+
+.pagination{
+    font-family: 'Lora', serif;
+    font-size: 1.2em;
+    color: #717171;
+    text-align: center;
+    width: 100%;
+}
+
+.mining_btn{
+    text-align: center;
+}
+
+.min_btn{
+    width: 25%;
+    display: inline-block;
+}
+
+.blockchain{
+    margin-left: 10%;
+    overflow: auto;
+}
+
+.errorlist{
+    font-weight: bolder;
+}
+
+.monster_icon{
+    width: 20%;
+}
+
+.scrollable{
+    height: 33em;
+    overflow: auto;
+    border: 1px solid black;
+    padding: 1%;
+}
+
+.the_scrolled{
+    height: fit-content;
+}
+
+.space{
+    margin-bottom: 5%;
+}
+
+@media (min-width: 1000px){
+    .monster{
+        float: left;
+        width: 33%;
+        min-width: 250px;
+        margin: auto;
+        text-align: center;
+    }
+}
+
+@media (max-width: 525px){
+    .monster{
+        float: left;
+        width: 100%;
+        min-width: 250px;
+        margin: auto;
+        text-align: center;
+    }
+}
