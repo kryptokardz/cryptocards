@@ -57,7 +57,7 @@ class Block(object):
             separators=(',', ':'))
         return block
 
-    def _update_chain(self):
+    def _update_chain(self):  # pragma: no cover
         """Update json file with blockchain."""
         block = {
             'index': self.index,
@@ -140,7 +140,7 @@ class BlockChain(object):
         self.chain.append(new_block)
         return nonce, monster.name
 
-    def _calc_pow_hash(self, index, timestamp, previous_hash, user, monster_data, nonce):
+    def _calc_pow_hash(self, index, timestamp, previous_hash, user, monster_data, nonce):  # pragma: no cover
         """Calc new hash until the POW requirements are met."""
         sha = hashlib.sha256()
         index = str(index).encode('utf8')
@@ -158,7 +158,7 @@ class BlockChain(object):
         return sha.hexdigest()
 
 
-def create_monster(user):
+def create_monster(user):  # pragma: no cover
     """Create monster after mining is complete."""
     types = {
         'Zombie': 'img/c_mon1.png',

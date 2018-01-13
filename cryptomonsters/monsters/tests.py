@@ -45,7 +45,7 @@ class MonsterModelTestCase(TestCase):
     def test_random_stats_function_works(self):
         """Test andom stats function is return an int between 1 and 10."""
         self.assertIsInstance(random_stats(), int)
-        self.assertIn(random_stats(), [x for x in range(1, 20)])
+        self.assertIn(random_stats(), [x for x in range(1, 21)])
 
     def test_random_type_function_works(self):
         """Test that the random type function is returning a string."""
