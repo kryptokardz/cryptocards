@@ -4,6 +4,11 @@ A card trading game that uses blockchain technology in order for players to get 
 
 This is a work in progress and hopefully we will remember to keep this updated as we move along.
 
+## Deployed Site
+
+Start growing your horde now!
+
+**[Deployed Site](http://ec2-34-215-7-234.us-west-2.compute.amazonaws.com/)**
 
 ## Authors
 **[Cody Dibble](https://www.github.com/hcodydibble)** -
